@@ -20,12 +20,13 @@ Last tested on Windows 11 22000.376
 ### Cons
 
 ➖ Breaks Sysprep <br>
+➖ Breaks newer system updates if you use install_wim_tweak to remove components.
 ➖ Don't use sfc/scannow command
 
 ## Pre-Requisite
 
 • NTFS Access <br>
-• Install_Wim_Tweak.exe <br>
+• Install_Wim_Tweak.exe <br> (skip if you want to recieve updates)
 • DISM++ (Optional but recommended) <br>
 • WinAeroTweaker <br>
 • Linux Live or any other OS on duablboot (if you want to strip to barebone)
@@ -80,6 +81,14 @@ In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *comm* | Remove-AppxPackage
 Get-AppxPackage -AllUsers *mess* | Remove-AppxPackage
+```
+
+### Clipchamp, Quick Assist and Family
+In the Powershell, type:
+```
+Get-AppxPackage -AllUsers *Clipchamp* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *QuickAssist* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *Family* | Remove-AppxPackage
 ```
 
 ### Camera
