@@ -20,7 +20,7 @@ Last tested on Windows 11 22000.376
 ### Cons
 
 ➖ Breaks Sysprep <br>
-➖ Breaks newer system updates if you use install_wim_tweak to remove components.
+➖ Breaks newer system updates if you use install_wim_tweak to remove components
 ➖ Don't use sfc/scannow command
 
 ## Pre-Requisite
