@@ -19,14 +19,14 @@ Last tested on Windows 11 22000.376
 
 ### Cons
 
-➖ Breaks Sysprep 
-➖ Breaks newer system updates if you use install_wim_tweak to remove components
-➖ Don't use sfc/scannow command
+➖ Breaks Sysprep <br>
+➖ Breaks newer system updates if you use install_wim_tweak to remove components <br>
+➖ Don't use sfc/scannow command <br>
 
 ## Pre-Requisite
 
 • NTFS Access <br>
-• Install_Wim_Tweak.exe (skip if you want to recieve updates)
+• Install_Wim_Tweak.exe (skip if you want to recieve updates) <br>
 • DISM++ (Optional but recommended) <br>
 • WinAeroTweaker <br>
 • Linux Live or any other OS on duablboot (if you want to strip to barebone)
