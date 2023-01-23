@@ -524,22 +524,31 @@ Use the batch script to disable them. <br>
 
 ## Stripping Windows 11 to barebone! (only for 21H2)
 
-To strip Windows 11 to barebones, you need to uninstall Windows Feature Experience Pack, which has most of the new features (XAML taskbar, start menu, Get Started app). After uninstall Feature Experience Pack, you won't be able to go back to the Windows 11 look, unless you reinstall Feature Experience Pack. **DO NOT DO THIS AT HOME, IF YOU DON'T KNOW WHAT YOU'RE DOING. ESPECIALLY DON'T TRY THIS ON YOUR MAIN COMPUTER.**
+To strip Windows 11 to barebones, you need to uninstall Windows Feature Experience Pack, which has most of the new features (XAML taskbar, start menu, Get Started app). After uninstall Feature Experience Pack, you won't be able to go back to the Windows 11 look, unless you reinstall Feature Experience Pack. **DO NOT DO THIS AT HOME AND ON YOUR MAIN COMPUTER.**
 
 1. Install ExplorerPatcher or StartAllBack, and enable custom shell (Windows 10 taskbar and start menu in case of ExplorerPatcher, custom taskbar and start menu for SAB)
-2. Open up CMD with Administrator permissions, and type in ```DISM /Online /Get-Packages | findstr UserExperience```
+2. Open up CMD with Administrator permissions, and type in: 
+```
+DISM /Online /Get-Packages | findstr UserExperience
+```
 ![image](https://user-images.githubusercontent.com/81305501/214150015-10e3f270-85c5-4c07-95be-de655aaa3cef.png)
-3. Type in DISM /Online /Remove-Package /PackageName: (type in what you got in Package Identity earlier)
+3. Type in: 
+```
+DISM /Online /Remove-Package /PackageName: (type in what you got in Package Identity earlier)
+```
 If you have two packages (like in previous screenshot), uninstall the newer one.
 4. Press Enter and proceed to remove package. If DISM prompts you to restart, type Y. If you don't want to restart for now, type N.
-![image](https://user-images.githubusercontent.com/81305501/214150565-0c3204ab-6c03-4a51-b49e-4f38c56195b4.png)
+
+![214150565-0c3204ab-6c03-4a51-b49e-4f38c56195b4](https://user-images.githubusercontent.com/81305501/214152195-c86a5a5d-8b82-46ac-86ba-eb51abc12fdc.png)
+
 5. After reboot, your system will be stripped to barebones (forgot to debloat earlier)
+ 
 ![Windows 10 and later x64-2023-01-23-22-12-55](https://user-images.githubusercontent.com/81305501/214151238-e684c5e2-9e73-4ca9-b0af-2d2f0eb613e9.png)
 
 
 
-## Congratulations! Your copy of Windows is now Debloated & Optimized!
-Things will change in the future, and I'll do what I can to keep this guide updated. As of January 2023, this guide works on Windows 11 22000.376
+## Congratulations! Your copy of Windows is now debloated & optimized!
+More bloat will be added in the future, and I'll do what I can to keep this guide updated. As of January 2023, this guide works on Windows 11 22000.376
 
 ## Credits 
 
