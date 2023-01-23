@@ -522,60 +522,30 @@ Simply install WinAeroTweaker and import the preset made by me (.ini file) <br>
 
 Use the batch script to disable them. <br>
 
-## Stripping Windows 11 to barebone!
+## Stripping Windows 11 to barebone! (only for 21H2)
 
-**NOTE : The stripping method doesn't work on 22000.184 and above builds, though the registry one does** <br>
+To strip Windows 11 to barebones, you need to uninstall Windows Feature Experience Pack, which has most of the new features (XAML taskbar, start menu, Get Started app). After uninstall Feature Experience Pack, you won't be able to go back to the Windows 11 look, unless you reinstall Feature Experience Pack. **DO NOT DO THIS AT HOME, IF YOU DON'T KNOW WHAT YOU'RE DOING. ESPECIALLY DON'T TRY THIS ON YOUR MAIN COMPUTER.**
 
-## For Build 22000.184/22454.1000 and above
+1. Install ExplorerPatcher or StartAllBack, and enable custom shell (Windows 10 taskbar and start menu in case of ExplorerPatcher, custom taskbar and start menu for SAB)
+2. Open up CMD with Administrator permissions, and type in ```DISM /Online /Get-Packages | findstr UserExperience```
+![image](https://user-images.githubusercontent.com/81305501/214150015-10e3f270-85c5-4c07-95be-de655aaa3cef.png)
+3. Type in DISM /Online /Remove-Package /PackageName: (type in what you got in Package Identity earlier)
+If you have two packages (like in previous screenshot), uninstall the newer one.
+4. Press Enter and proceed to remove package. If DISM prompts you to restart, type Y. If you don't want to restart for now, type N.
+![image](https://user-images.githubusercontent.com/81305501/214150565-0c3204ab-6c03-4a51-b49e-4f38c56195b4.png)
+5. After reboot, your system will be stripped to barebones (forgot to debloat earlier)
+![Windows 10 and later x64-2023-01-23-22-12-55](https://user-images.githubusercontent.com/81305501/214151238-e684c5e2-9e73-4ca9-b0af-2d2f0eb613e9.png)
 
-Open WinAeroTweaker and enable the classic windows 10 start menu <br>
-sign out and sign in again to let the changes take place, and there you have the old Windows 10 start menu, after 22000.132 it's broken but before this update you can still use it . Now continue from  [Making it usable](https://github.com/TheWorldOfPC/Windows11-Debloat-Privacy-Guide#Making-it-usable) <br>
-
-![Screenshot (1185)](https://user-images.githubusercontent.com/85176292/132989873-06223852-2fd5-41bc-b79d-293338ad7d06.png)
-
-## For Build 22000.176 and older
-
-To remove the new taskbar you need to dualboot to any other OS or use Linux Live (any distro) <br>
-Now use NTFS Access and gain ownership of C:\Windows\SystemApps\
-
-![Screenshot (1004)](https://user-images.githubusercontent.com/85176292/132132735-421f9e2f-8aab-4570-9ebc-2670e9c2cbfd.png)
-
-Now delete the folder named "MicrosoftWindows.Client.CBS_cw5n1h2txyewy" <br>
-
-![Screenshot (1005)](https://user-images.githubusercontent.com/85176292/132132744-5e804520-0538-4b23-ae6a-a4686476c013.png)
-
-Now just boot back to Windows 11, you'll notice a broken taskbar <br>
-Press Win Key + R and type "netplwiz" and press enter <br>
-
-![Screenshot (3)](https://user-images.githubusercontent.com/85176292/132132748-3ddd7117-f1b7-4359-893a-9fae2cd240d0.png)
-
-Now create a new user account, log out of the current one and log into the new one <br>
-
-![Screenshot (4)](https://user-images.githubusercontent.com/85176292/132132754-c51f2c7d-ca2b-4fad-ba28-24021780570f.png)
-
-and there you have the old Windows 10 start menu, after 22000.132 it's broken but before this update you can still use it <br>
-
-### Making it usable
-
-Well since the Win10 start menu is broken we need an alternative to it like [StartAllBack](https://www.startallback.com/). <br>
-
-![Screenshot (1)](https://user-images.githubusercontent.com/85176292/147569057-49849363-c0c4-49cc-9646-85dc38dc05e2.png)
-![Screenshot (2)](https://user-images.githubusercontent.com/85176292/147569068-ad579193-8a28-46f5-a539-4b41caf359a6.png)
-
-## And here you have Windows 11 Barebone!
-By removing the new start menu and taskbar files we also remove the new explorer UI and context menu, but as I said if you are not a big fan of the new UI it won't matter.
-
-![Screenshot (3)](https://user-images.githubusercontent.com/85176292/147568962-77363296-6bb6-4a6b-a0d6-87c604cb9178.jpg)
 
 
 ## Congratulations! Your copy of Windows is now Debloated & Optimized!
-Things will change in the future, and I'll do what I can to keep this guide updated. As of December 2021, this guide works on Windows 11 22000.376
+Things will change in the future, and I'll do what I can to keep this guide updated. As of January 2023, this guide works on Windows 11 22000.376
 
 ## Credits 
 
 • This guide is based on Adolf Intel's [Windows 10 Privacy Guide](https://github.com/adolfintel/Windows10-Privacy) with many modifications to make it usable on Windows 11 <br>
 • Thanks to PPGSource#3112 from my discord server for stripping Windows 11 to barebones <br>
-• Guide by The World Of PC#8783 <br>
+• Original Guide by The World Of PC#8783, this version is made by Typical#9480 <br>
 • [Discord Server](https://discord.gg/WtmzZ4EEjt) <br>
 • [Youtube Channel](https://www.youtube.com/channel/UCphlFqj7Xa9INM3DIvtXUhA/) <br>
 <br>
