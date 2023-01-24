@@ -537,6 +537,7 @@ DISM /Online /Get-Packages | findstr UserExperience
 DISM /Online /Remove-Package /PackageName: (type in what you got in Package Identity earlier)
 ```
 If you have two packages (like in previous screenshot), uninstall the newer one.
+
 4. Press Enter and proceed to remove package. If DISM prompts you to restart, type Y. If you don't want to restart for now, type N.
 
 ![214150565-0c3204ab-6c03-4a51-b49e-4f38c56195b4](https://user-images.githubusercontent.com/81305501/214152195-c86a5a5d-8b82-46ac-86ba-eb51abc12fdc.png)
