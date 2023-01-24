@@ -25,13 +25,12 @@ Last tested on Windows 11 22000.376
 
 ## Pre-Requisite
 
-• NTFS Access <br>
+• NTFS Access (to remove Windows Defender) <br>
 • Install_Wim_Tweak.exe (skip if you want to recieve updates) <br>
 • DISM++ (Optional but recommended) <br>
-• WinAeroTweaker <br>
-• Linux Live or any other OS on duablboot (if you want to strip to barebone)
+• Winaero Tweaker
 
-## Debloating Windows 11 (Just The Bloatwares)
+## Debloating Windows 11 
 
 ### Before you debloat!
 At the end of the setup process, create a local account, don't use Cortana and turn off everything in the privacy settings. <br>
@@ -356,16 +355,14 @@ And here I've removed every bloatware <br>
 ![Screenshot (13)](https://user-images.githubusercontent.com/85176292/132127308-3c44ff88-4dd9-4595-a1c9-f868c77ff33c.png)
 
 Now create a new user account or enable Windows Administrator Account, log into it and voila! <br>
-You Have Successfully Debloated Windows 11!
+You Have successfully removed nearly all UWP apps from Windows 11!
 
 ![Screenshot (14)](https://user-images.githubusercontent.com/85176292/132127314-a39be4cc-f084-4190-81e5-c44306db1edf.png)
 
 Unfortunately there is no way to remove "Get Started App" from the start menu without breaking the new startmenu/taskbar (at least for now) so let's just pretend it's not there at all :)
 
-## Basic Tweaking
-
 ### Removing Options from Settings Apps
-Now since you have removed the bloatware it is recommended to remove the options related to them from the settings apps <br>
+Now since you have removed the bloatware, it is recommended to remove the options related to them from the Settings<br>
 Open Regedit and go to `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer` <br>
 Create new string named 'SettingsPageVisibility' <br>
 now type 
@@ -373,7 +370,7 @@ now type
 hide:cortana;crossdevice;easeofaccess-speechrecognition;holographic-audio;mobile-devices;privacy-automaticfiledownloads;privacy-feedback;recovery;remotedesktop;speech;sync;sync;easeofaccess-closedcaptioning;easeofaccess-highcontrast;easeofaccess-keyboard;easeofaccess-magnifier;easeofaccess-mouse;easeofaccess-narrator;easeofaccess-otheroptions;privacy-location;backup;findmydevice;quiethours;tabletmode
 ```
 
-TIP : Add `;windowsdefender` at the end of the string value if you have removed Windows Defender as well (doesn't matter if u kept updates or not)
+TIP : Add `;windowsdefender` at the end of the string value if you have removed Windows Defender as well (doesn't matter if you kept updates or not)
 
 ### Edit with 3D Paint / 3D Print
 It is now possible to remove 3D Paint and 3D Print, but they forgot to remove the option in the context menu when you remove them. To remove it, run this in the command prompt:
@@ -508,11 +505,11 @@ schtasks /Change /TN "\Microsoft\Windows\Diagnosis\Scheduled" /disable
 schtasks /Change /TN "\Microsoft\Windows\NetTrace\GatherNetworkInfo" /disable
 del /F /Q "C:\Windows\System32\Tasks\Microsoft\Windows\SettingSync\*" 
 ```
-## Disabling Useless Services and Applying some tweaks
+## Disabling useless services and applying some tweaks
 
 Use the batch script to disable some useless services and the reg file to import some tweaks <br>
 
-## Tweaks by WinAeroTweaker
+## Tweaks by Winaero Tweaker
 
 Simply install WinAeroTweaker and import the preset made by me (.ini file) <br>
 
