@@ -7,7 +7,7 @@ This guide is meant for advanced users who wants to get rid off Windows 11's blo
 ![Screenshot (1)](https://user-images.githubusercontent.com/85176292/132135816-81a16539-b8b5-4d54-aaae-aa1ea66afa77.png)
 
 **Note : You're doing this at your own risk, I am not responsible for any data loss or damage that may occur.** <br>
-Last tested on Windows 11 22000.376
+Last tested on Windows 11 22621.525
 
 ### Pros
 
@@ -38,12 +38,27 @@ At the end of the setup process, create a local account, don't use Cortana and t
 ![Screenshot (01)](https://user-images.githubusercontent.com/85176292/132122504-1412f80f-2bac-4671-93f0-fa5204082b59.png)
 ![Screenshot (02)](https://user-images.githubusercontent.com/85176292/132122505-95823c80-06cc-4037-a48a-7e4a2e0a904a.png)
 
-**Make sure you are doing this on a temporary user account because you'll be deleting this later on** <br>
+To create a local user account in Windows 11 22H2 (doesn't include Enterprise/Education), you can go with 3 alternative options:
+
+1. When you should connect to a Internet, press Shift+F10 and type in Command Prompt:
+```oobe\bypassnro```.
+After reboot, you should select I don't have internet and continue further.
+![Windows 10 and later x64-2023-01-27-16-12-01](https://user-images.githubusercontent.com/81305501/215120064-2e8f4129-d66e-423f-9586-39aac8364e86.png)
+
+2. Configure as normally, until you get a login to Microsoft Account. Then type in a@a.com, and any random password.
+![Windows 10 and later x64-2023-01-27-16-16-33](https://user-images.githubusercontent.com/81305501/215121534-dec5fc8b-265c-4274-a992-7e2444d405c3.png)
+It should error that someone has entered an incorrect password too many times. Just click Next and make a local account.
+
+3. Select Set up for work and school on the How would you like to set up this device screen. Click Next, select Sign-in options and choose Domain join instead. It should throw you on the local account screen.
+
+**Make sure you are doing this on a temporary user account because you'll be deleting this later on.** <br>
 Copy and paste the "install_wim_tweak.exe" to C:\Windows\System32 <br>
 
 ![Screenshot (03)](https://user-images.githubusercontent.com/85176292/132123362-f68c5829-c739-4628-94be-7ca2dc27fb54.png)
 
-Before debloating if you have recently updated your copy of Windows 11 or just fresh installed it, I would recommend you to cleanup the component store with /resetbase command or use DISM++ for ease, it clears the temp files with update leftovers in WinSxS. <br>
+The first thing to do after the install is installing the updates. You should get all installed, because some of them might revert your changes after the debloat. So after the OOBE, open up Start Menu, select Settings and go to Windows Update section, and click Check updates.
+
+Before debloating if you have recently updated your copy of Windows 11 or just freshly installed it, I would recommend you to cleanup the component store with /resetbase command or use DISM++ for ease, it clears the temp files with update leftovers in WinSxS. <br>
 
 ![Screenshot (04)](https://user-images.githubusercontent.com/85176292/132123367-6e2ebe05-9f93-4c18-86cf-ffb1f7cc34ea.png)
 
@@ -55,12 +70,6 @@ Before debloating if you have recently updated your copy of Windows 11 or just f
 DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
 After the cleanup is done you can start debloating Windows 11. <br>
-You can debloat using my debloat tool and then continue further optimization from [Finalizing](https://github.com/TheWorldOfPC/Windows11-Debloat-Privacy-Guide#finalizing) <br>
-
-![Screenshot (1160)](https://user-images.githubusercontent.com/85176292/132950096-30fcdaf0-82f5-45bc-97df-7fe3f730e7de.png)
-
-Or you can start from here <br>
-
 ### Alarms and Clock
 ```
 Get-AppxPackage -AllUsers *alarms* | Remove-AppxPackage
@@ -546,7 +555,7 @@ If you have two packages (like in previous screenshot), uninstall the newer one.
 
 
 ## Congratulations! Your copy of Windows is now debloated & optimized!
-More bloat will be added in the future, and I'll do what I can to keep this guide updated. As of January 2023, this guide works on Windows 11 22000.376
+More bloat will be added in the future, and I'll do what I can to keep this guide updated. As of January 2023, this guide works on Windows 11 22621.525
 
 ## Credits 
 
