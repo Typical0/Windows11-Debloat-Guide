@@ -587,6 +587,7 @@ To strip Windows 11 to barebones, you need to uninstall Windows Feature Experien
 DISM /Online /Get-Packages | findstr UserExperience
 ```
 ![image](https://user-images.githubusercontent.com/81305501/214150015-10e3f270-85c5-4c07-95be-de655aaa3cef.png)
+
 3. Type in: 
 ```
 DISM /Online /Remove-Package /PackageName: (type in what you got in Package Identity earlier)
