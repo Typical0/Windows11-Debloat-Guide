@@ -1,10 +1,10 @@
-# Windows 11 Debloat / Privacy Guide
+# Windows 11 Debloat Guide
 
 ## IMPORTANT
 
 This guide is meant for advanced users who wants to get rid off Windows 11's bloatware and telemetry, if you have no experience of such thing then you can consider this [guide](https://youtu.be/QBp1d2uhG5M) for ease. <br>
 
-![Screenshot (1)](https://user-images.githubusercontent.com/85176292/132135816-81a16539-b8b5-4d54-aaae-aa1ea66afa77.png)
+![Windows 10 and later x64-2023-01-28-14-07-35](https://user-images.githubusercontent.com/81305501/215268038-8c6d21c8-14f0-4fc6-81b3-498bf5de8a30.png)
 
 **Note : You're doing this at your own risk, I am not responsible for any data loss or damage that may occur.** <br>
 Last tested on Windows 11 22621.525
