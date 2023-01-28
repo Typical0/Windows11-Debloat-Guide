@@ -1,6 +1,6 @@
 @echo off
 
-::Made by TheWorldOfPC (https://youtube.com/TheWorldOfPC)
+::Originally made by TheWorldOfPC (https://youtube.com/TheWorldOfPC)
 
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\DPS" /v "Start" /t REG_DWORD /d 4 /f
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\WdiServiceHost" /v "Start" /t REG_DWORD /d 4 /f
