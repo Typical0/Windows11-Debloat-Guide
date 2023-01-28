@@ -49,7 +49,7 @@ After reboot, you should select I don't have internet and continue further.
 ![Windows 10 and later x64-2023-01-27-16-16-33](https://user-images.githubusercontent.com/81305501/215121534-dec5fc8b-265c-4274-a992-7e2444d405c3.png)
 It should error that someone has entered an incorrect password too many times. Just click Next and make a local account.
 
-3. Select Set up for work and school on the How would you like to set up this device screen. Click Next, select Sign-in options and choose Domain join instead. It should throw you on the local account screen.
+3. Select Set up for work and school on the How would you like to set up this device screen. Click Next, select Sign-in options and choose Domain join instead. You should be on the local account screen.
 
 **Make sure you are doing this on a temporary user account because you'll be deleting this later on.** <br>
 Copy and paste the "install_wim_tweak.exe" to C:\Windows\System32 <br>
@@ -248,7 +248,7 @@ In the Powershell, type:
 ```
 Get-AppxPackage -AllUsers *WebeEperience* | Remove-AppxPackage
 ```
-When it's done removing, log out of your account, and log back in. You shouldn't have Widgets option in Settings.
+When it's done removing, log out of your account, and log back in. You shouldn't have Widgets option in taskbar settings.
 
 ### Microsoft Store 
 In the PowerShell, type: <br>
@@ -320,8 +320,17 @@ In Powershell, type:
 Get-AppxPackage -AllUsers *GetHelp* | Remove-AppxPackage
 ```
 
-### Windows Defender (Breaks Windows Updates)
-In the command prompt, type:
+### Windows Defender (removing dependency updates and services)
+
+If you want to backup all services, in the command prompt, type:
+```
+reg export HKLM\System\CurrentControlSet\Services\Sense Sense.reg
+reg export HKLM\System\CurrentControlSet\Services\SecurityHealthService SecurityHealthService.reg
+reg export HKLM\System\CurrentControlSet\Services\WinDefend WinDefend.reg
+```
+Copy them somewhere else, and apply them, if you plan to restore Windows Defender.
+
+To remove Windows Defender, in the command prompt, type:
 ```
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "0" /f
@@ -340,7 +349,18 @@ install_wim_tweak /o /c Windows-Defender /r
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d 0 /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /f
 ```
-**Restart your PC** after that use NTFS Access and take ownership of C:\Program Files\WindowsApps\ & C:\ProgramData\Microsoft
+
+To remove WinDefend, which is the main service, you need to: 
+1. Go to winaero.com and download Winaero Tweaker. Install it.
+2. In Tools section, you should find "Run as TrustedInstaller". In "Exectuable file" type regedit.exe. 
+3. Press Enter.
+4. Go to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend.
+5. Right-click WinDefend, and select Delete from the context menu.
+6. When a permanent delete dialog appears, select yes
+7. Reboot your PC
+Don't forget to backup the services. If you didn't, you can try to extract it from the original image, by using SYSTEM files from the %image%\Windows\system32\drivers\etc.
+
+After that use NTFS Access and take ownership of C:\Program Files\WindowsApps\ & C:\ProgramData\Microsoft
 
 ![Screenshot (09)](https://user-images.githubusercontent.com/85176292/132126349-d91c4b65-f3c4-412e-a0c9-bba4c039ac30.png)
 
@@ -352,7 +372,7 @@ In ProgramData\Microsoft delete every folder related to Windows Defender
 
 ![Screenshot (11)](https://user-images.githubusercontent.com/85176292/132126653-1cbec29b-4c31-49f0-b596-b230913f4f30.png)
 
-### Windows Defender (Keeping Windows Updates)
+### Windows Defender (keeping definition updates and services)
 
 Just take the ownership of C:\Program Files\WindowsApps\ and C:\ProgramData\Microsoft <br>
 Then delete the SecHealthUI folder insider WindowsApps and every folder related to Windows Defender inside ProgramData <br>
@@ -377,7 +397,7 @@ You Have successfully removed nearly all UWP apps from Windows 11!
 
 ![Screenshot (14)](https://user-images.githubusercontent.com/85176292/132127314-a39be4cc-f084-4190-81e5-c44306db1edf.png)
 
-Unfortunately there is no way to remove "Get Started App" from the start menu without breaking the new startmenu/taskbar (at least for now) so let's just pretend it's not there at all :)
+Unfortunately there is no way to remove "Get Started App" from the start menu without compromising the new startmenu/taskbar so just pretend it's not there at all :)
 
 ### Removing Options from Settings Apps
 Now since you have removed the bloatware, it is recommended to remove the options related to them from the Settings<br>
@@ -527,13 +547,13 @@ del /F /Q "C:\Windows\System32\Tasks\Microsoft\Windows\SettingSync\*"
 
 Use the batch script to disable some useless services and the reg file to import some tweaks <br>
 
-## Tweaks by Winaero Tweaker
+## Tweaks for Winaero Tweaker
 
 Simply install WinAeroTweaker and import the preset (.ini file) <br>
 
 ![Screenshot (1672)](https://user-images.githubusercontent.com/85176292/147569287-a7223dc9-3081-4289-b18e-8f71507e8d02.png)
 
-## (OPTIONAL) Disabling Windows Updates & Store related services
+## (OPTIONAL) Disabling Windows Update and Store related services (if you don't want to use them)
 
 Use the batch script to disable them. <br>
 
