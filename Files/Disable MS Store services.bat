@@ -1,6 +1,6 @@
 @echo off
 
-::Made by TheWorldOfPC (https://youtube.com/TheWorldOfPC)
+::Original script made by TheWorldOfPC (https://youtube.com/TheWorldOfPC)
 
 echo Disabling Delivery Optimization...
 REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\DoSvc" /v "Start" /t REG_DWORD /d 4 /f

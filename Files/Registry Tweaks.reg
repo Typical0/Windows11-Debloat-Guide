@@ -1,5 +1,4 @@
-﻿Windows Registry Editor Version 5.00			Made By TheWorldOfPC
-(https://www.youtube.com/TheWorldOfPC)
+﻿Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters]
 "autodisconnect"=dword:ffffffff
