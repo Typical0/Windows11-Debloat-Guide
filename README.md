@@ -353,12 +353,19 @@ reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /f
 To remove WinDefend, which is the main service, you need to: 
 1. Go to winaero.com and download Winaero Tweaker. Install it.
 2. In Tools section, you should find "Run as TrustedInstaller". In "Exectuable file" type regedit.exe. 
+![Screenshot 2023-01-28 041259](https://user-images.githubusercontent.com/81305501/215266309-738e2ff5-49b5-4de7-af64-5ea746cdedad.png)
 3. Press Enter.
 4. Go to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend.
 5. Right-click WinDefend, and select Delete from the context menu.
-6. When a permanent delete dialog appears, select yes
-7. Reboot your PC
-Don't forget to backup the services. If you didn't, you can try to extract it from the original image, by using SYSTEM files from the %image%\Windows\system32\drivers\etc.
+
+![Screenshot 2023-01-28 (2)](https://user-images.githubusercontent.com/81305501/215266405-b47577fe-ea4f-41f6-86d4-80c3c413384b.png)
+
+6. When a permanent delete dialog appears, select Yes.
+
+![Screenshot 2023-01-28 042403](https://user-images.githubusercontent.com/81305501/215266726-fc6ebf26-0620-4020-9087-afad2a2592c6.png)
+
+7. Reboot your PC.
+Don't forget to backup the services. 
 
 After that use NTFS Access and take ownership of C:\Program Files\WindowsApps\ & C:\ProgramData\Microsoft
 
