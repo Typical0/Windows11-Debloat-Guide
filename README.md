@@ -243,6 +243,13 @@ In the command prompt, type:
 schtasks /Change /TN "\Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
 ```
 
+### Widgets (Windows Web Experience Pack)
+In the Powershell, type:
+```
+Get-AppxPackage -AllUsers *WebeEperience* | Remove-AppxPackage
+```
+When it's done removing, log out of your account, and log back in. You shouldn't have Widgets option in Settings.
+
 ### Microsoft Store 
 In the PowerShell, type: <br>
 ```
@@ -289,11 +296,13 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t RE
 
 ### Microsoft Edge (Chromium)
 
+**DOESN'T WORK ANYMORE IN NEWER VERSIONS**
+
 ![Screenshot (07)](https://user-images.githubusercontent.com/85176292/132125057-ab8b2dbb-bb0a-4dc3-88c2-418f683e5332.png)
 
 Now open powershell as Administrator and type: <br>
 ```
-cd %PROGRAMFILES(X86)%\Microsoft\Edge\Application\9*\Installer && setup --uninstall --force-uninstall --system-level
+cd %PROGRAMFILES(X86)%\Microsoft\Edge\Application\10*\Installer && setup --uninstall --force-uninstall --system-level
 ```
 Microsoft Edge is now uninstalled but you still can see a broken icon on start menu to get rid off it open command prompt and type: <br>
 
@@ -520,7 +529,7 @@ Use the batch script to disable some useless services and the reg file to import
 
 ## Tweaks by Winaero Tweaker
 
-Simply install WinAeroTweaker and import the preset made by me (.ini file) <br>
+Simply install WinAeroTweaker and import the preset (.ini file) <br>
 
 ![Screenshot (1672)](https://user-images.githubusercontent.com/85176292/147569287-a7223dc9-3081-4289-b18e-8f71507e8d02.png)
 
@@ -560,7 +569,6 @@ More bloat will be added in the future, and I'll do what I can to keep this guid
 ## Credits 
 
 • This guide is based on Adolf Intel's [Windows 10 Privacy Guide](https://github.com/adolfintel/Windows10-Privacy) with many modifications to make it usable on Windows 11 <br>
-• Thanks to PPGSource#3112 from my discord server for stripping Windows 11 to barebones <br>
 • Original Guide by The World Of PC#8783, this version is made by Typical#9480 <br>
 • [Discord Server](https://discord.gg/WtmzZ4EEjt) <br>
 • [Youtube Channel](https://www.youtube.com/channel/UCphlFqj7Xa9INM3DIvtXUhA/) <br>
