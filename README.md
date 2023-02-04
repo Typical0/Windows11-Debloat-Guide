@@ -56,7 +56,7 @@ Copy and paste the "install_wim_tweak.exe" to C:\Windows\System32 <br>
 
 ![Screenshot (03)](https://user-images.githubusercontent.com/85176292/132123362-f68c5829-c739-4628-94be-7ca2dc27fb54.png)
 
-The first thing to do after the install is installing the updates. You should get all installed, because some of them might revert your changes after the debloat. So after the OOBE, open up Start Menu, select Settings and go to Windows Update section, and click Check updates.
+The first thing to do after the install is installing the updates. You should get all installed, because some of them might revert your changes after the debloat. So after the OOBE, open up Start Menu, select Settings, go to Windows Update section, and click Check updates.
 
 Before debloating if you have recently updated your copy of Windows 11 or just freshly installed it, I would recommend you to cleanup the component store with /resetbase command or use DISM++ for ease, it clears the temp files with update leftovers in WinSxS. <br>
 
