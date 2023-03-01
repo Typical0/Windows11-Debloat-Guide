@@ -21,7 +21,7 @@ Last tested on Windows 11 22621.525.
 
 ➖ Breaks Sysprep <br>
 ➖ Breaks newer system updates if you use install_wim_tweak to remove components <br>
-➖ Don't use sfc/scannow command <br>
+➖ Don't use `sfc /scannow` command <br>
 
 ## Pre-Requisite
 
