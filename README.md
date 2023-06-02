@@ -255,7 +255,7 @@ schtasks /Change /TN "\Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
 ### Widgets (Windows Web Experience Pack)
 In the Powershell, type:
 ```
-Get-AppxPackage -AllUsers *WebeEperience* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *WebExperience* | Remove-AppxPackage
 ```
 When it's done removing, log out of your account, and log back in. You shouldn't have Widgets option in taskbar settings.
 
