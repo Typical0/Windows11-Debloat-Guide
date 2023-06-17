@@ -58,13 +58,13 @@ Copy and paste the "install_wim_tweak.exe" to C:\Windows\System32 <br>
 
 The first thing to do after the install is installing the updates. You should get all installed, because some of them might revert your changes after the debloat. So after the OOBE, open up Start Menu, select Settings, go to Windows Update section, and click Check updates.
 
-Before debloating if you have recently updated your copy of Windows 11 or just freshly installed it, I would recommend you to cleanup the component store with /resetbase command or use DISM++ for ease, it clears the temp files with update leftovers in WinSxS. <br>
+If you have recently updated your copy of Windows 11 or just freshly installed it, I would recommend you to cleanup the component store before debloating with /resetbase command or use DISM++ for easy way, it clears the temp files with update leftovers in WinSxS. <br>
 
 ![Screenshot (04)](https://user-images.githubusercontent.com/85176292/132123367-6e2ebe05-9f93-4c18-86cf-ffb1f7cc34ea.png)
 
 ![Screenshot (05)](https://user-images.githubusercontent.com/85176292/132123387-5c0b6700-0497-4561-a01f-2ba419455c46.png)
 
-**Note : If DISM++ gives error while cleaning up the component store use this command (Command Prompt as Admin Obviously)**
+**Note : If DISM++ gives error while cleaning up the component store use this command (Command Prompt as a Admin obviously)**
 
 ```
 DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
@@ -76,7 +76,7 @@ If you want to remove all the apps automatically, in the Powershell, type this:
 ```
 Get-AppxPackage | Remove-AppxPackage
 ```
-Ignore all the errors. If you prefer to delete all apps manually, start from Alarms and Clock section.
+Ignore all the errors. If you prefer to delete all apps manually, or if you like to leave some apps intact, start from Alarms and Clock section.
 
 ### Alarms and Clock
 In the Powershell, type:
@@ -257,7 +257,7 @@ In the Powershell, type:
 ```
 Get-AppxPackage -AllUsers *WebExperience* | Remove-AppxPackage
 ```
-When it's done removing, log out of your account, and log back in. You shouldn't have Widgets option in taskbar settings.
+When it's done removing, log out of your account, and log back in. The icon should be gone from taskbar and you shouldn't have Widgets option in taskbar settings.
 
 ### Microsoft Store 
 In the PowerShell, type: <br>
@@ -272,7 +272,7 @@ install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r
 ```
 
-### Removing Services (Not Recommended if you are going to use any UWP app)
+### Removing Windows Store services (not recommended if you are going to use any UWP app)
 
 In Command Prompt, type: <br>
 ```
@@ -290,7 +290,7 @@ In the PowerShell, type: <br>
 Get-AppxPackage -AllUsers *xbox* | Remove-AppxPackage
 ```
 
-### Removing Services (Not Recommended if you are going to use it in future)
+### Removing Xbox services (not recommended if you are going to use it in future)
 In Command Prompt, type: <br>
 ```
 sc delete XblAuthManager
@@ -313,7 +313,7 @@ Now open powershell as Administrator and type: <br>
 ```
 cd %PROGRAMFILES(X86)%\Microsoft\Edge\Application\10*\Installer && setup --uninstall --force-uninstall --system-level
 ```
-Microsoft Edge is now uninstalled, but you still can see a broken icon on start menu to get rid off it open command prompt and type: <br>
+Microsoft Edge is now uninstalled, but you still can see a broken icon on start menu. To get rid of it open command prompt and type: <br>
 
 ![Screenshot (08)](https://user-images.githubusercontent.com/85176292/132125728-0bca64ec-243b-4d22-865a-2f17ac82d478.png)
 
@@ -322,14 +322,9 @@ install_wim_tweak.exe /o /l
 install_wim_tweak.exe /o /c "Microsoft-Windows-Internet-Browser-Package" /r
 install_wim_tweak.exe /h /o /l
 ```
-Restart is required after this (you can restart later when you are done debloating everything).
+Restart is required after this (you can restart later when you are done debloating everything). In case of 22H2, you should just delete the leftover shortcut from Start Menu, it won't be there anymore.
 
-In Powershell, type:
-```
-Get-AppxPackage -AllUsers *GetHelp* | Remove-AppxPackage
-```
-
-### Windows Defender (removing dependency updates and services)
+### Windows Defender (removing definitions updates and services)
 
 If you want to backup all services, in the command prompt, type:
 ```
@@ -400,7 +395,7 @@ Now disable Windows Defender through WinAeroTweaker.
 
 ### Optimizing
 
-Now since you have removed all the bloatware let's just finally delete the leftovers from C:\Program Files\WindowsApps <br>
+Since you have removed all the bloatware, you can delete the leftovers from C:\Program Files\WindowsApps <br>
 Take the ownership as we did above. <br>
 Now delete folders according to what apps you removed... <br>
 
@@ -408,11 +403,11 @@ For example, I've removed everything and kept Store, Xbox, Notepad (UWP) and Win
 
 ![Screenshot (12)](https://user-images.githubusercontent.com/85176292/132127306-370369f6-d9f0-4a39-87e4-9b1eaa35eef8.png)
 
-And here I've removed every bloatware. <br>
+And here I've removed every app. <br>
 
 ![Screenshot (13)](https://user-images.githubusercontent.com/85176292/132127308-3c44ff88-4dd9-4595-a1c9-f868c77ff33c.png)
 
-Now create a new user account or enable Windows Administrator Account, log into it and voila! <br>
+Now create a new user account or enable Windows Administrator account, log into it and voila! <br>
 You have successfully removed nearly all UWP apps from Windows 11!
 
 ![Screenshot (14)](https://user-images.githubusercontent.com/85176292/132127314-a39be4cc-f084-4190-81e5-c44306db1edf.png)
@@ -425,7 +420,7 @@ Open Regedit and go to `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\
 Create new string named 'SettingsPageVisibility' <br>
 Now type: 
 ```
-hide:cortana;crossdevice;easeofaccess-speechrecognition;holographic-audio;mobile-devices;privacy-automaticfiledownloads;privacy-feedback;recovery;remotedesktop;speech;sync;sync;easeofaccess-closedcaptioning;easeofaccess-highcontrast;easeofaccess-keyboard;easeofaccess-magnifier;easeofaccess-mouse;easeofaccess-narrator;easeofaccess-otheroptions;privacy-location;backup;findmydevice;quiethours;tabletmode
+hide:cortana;crossdevice;easeofaccess-speechrecognition;holographic-audio;mobile-devices;privacy-automaticfiledownloads;privacy-feedback;remotedesktop;speech;sync;sync;easeofaccess-closedcaptioning;easeofaccess-highcontrast;easeofaccess-keyboard;easeofaccess-magnifier;easeofaccess-mouse;easeofaccess-narrator;easeofaccess-otheroptions;privacy-location;backup;findmydevice;quiethours;tabletmode
 ```
 
 TIP : Add `;windowsdefender` at the end of the string value if you have removed Windows Defender as well (doesn't matter if you kept updates or not)
@@ -598,8 +593,8 @@ If you have two packages (like in previous screenshot), uninstall the newer one.
 
 ![214150565-0c3204ab-6c03-4a51-b49e-4f38c56195b4](https://user-images.githubusercontent.com/81305501/214152195-c86a5a5d-8b82-46ac-86ba-eb51abc12fdc.png)
 
-5. After reboot, your system will be stripped to barebones (forgot to debloat earlier)
- 
+5. After reboot, your system will be stripped to barebones.
+6. 
 ![Windows 10 and later x64-2023-01-23-22-12-55](https://user-images.githubusercontent.com/81305501/214151238-e684c5e2-9e73-4ca9-b0af-2d2f0eb613e9.png)
 
 
@@ -610,5 +605,5 @@ More bloat will be added in the future, and I'll do what I can to keep this guid
 ## Credits 
 
 • This guide is based on Adolf Intel's [Windows 10 Privacy Guide](https://github.com/adolfintel/Windows10-Privacy) with many modifications to make it usable on Windows 11 <br>
-• Original Guide by The World Of PC#8783, this version is made by Typical#9480 <br>
+• Original Guide by The World Of PC#8783, this version is made by @typical0 (Typical#9480) <br>
 
