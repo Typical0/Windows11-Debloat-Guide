@@ -81,37 +81,37 @@ Ignore all the errors. If you prefer to delete all apps manually, or if you like
 ### Alarms and Clock
 In the Powershell, type:
 ```
-Get-AppxPackage -AllUsers *alarms* | Remove-AppxPackage
-Get-AppxPackage -AllUsers *people* | Remove-AppxPackage
+Get-AppxPackage  *alarms* | Remove-AppxPackage
+Get-AppxPackage  *people* | Remove-AppxPackage
 ```
 You can ignore any error that pops up.
 
 ### Calculator
 In the PowerShell, type:
 ```
-Get-AppxPackage -AllUsers *calc* | Remove-AppxPackage
+Get-AppxPackage  *calc* | Remove-AppxPackage
 ```
 Download Classic Calulator from [Here](https://winaero.com/get-calculator-from-windows-8-and-windows-7-in-windows-10/)
 
 ### Mail, Calendar, ...
 In the PowerShell, type:
 ```
-Get-AppxPackage -AllUsers *comm* | Remove-AppxPackage
-Get-AppxPackage -AllUsers *mess* | Remove-AppxPackage
+Get-AppxPackage  *comm* | Remove-AppxPackage
+Get-AppxPackage  *mess* | Remove-AppxPackage
 ```
 
 ### Clipchamp, Quick Assist and Family
 In the Powershell, type:
 ```
-Get-AppxPackage -AllUsers *Clipchamp* | Remove-AppxPackage
-Get-AppxPackage -AllUsers *QuickAssist* | Remove-AppxPackage
-Get-AppxPackage -AllUsers *Family* | Remove-AppxPackage
+Get-AppxPackage *Clipchamp* | Remove-AppxPackage
+Get-AppxPackage *QuickAssist* | Remove-AppxPackage
+Get-AppxPackage *Family* | Remove-AppxPackage
 ```
 
 ### Camera
 In the PowerShell, type:
 ```
-Get-AppxPackage -AllUsers *camera* | Remove-AppxPackage
+Get-AppxPackage *camera* | Remove-AppxPackage
 ````
 Ignore any error that pops up
 
@@ -130,20 +130,14 @@ install_wim_tweak /o /c Microsoft-Windows-ContactSupport /r
 ### Cortana (UWP App)
 In the powershell, type:
 ```
-Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage
+Get-AppxPackage Microsoft.549981C3F5F10 | Remove-AppxPackage
 ```
 
-### Music, TV
+### Movies & TV, Media Player (UWP), Windows Media Player Legacy
 In the PowerShell, type: <br>
 ```
-Get-AppxPackage -AllUsers *zune* | Remove-AppxPackage
+Get-AppxPackage *zune* | Remove-AppxPackage
 Get-WindowsPackage -Online | Where PackageName -like *MediaPlayer* | Remove-WindowsPackage -Online -NoRestart
-```
-
-### Groove Music
-In the PowerShell, type:
-```
-Get-AppxPackage -AllUsers *zune* | Remove-AppxPackage
 ```
 
 ### Microsoft Solitare Collection
@@ -163,7 +157,7 @@ Get-AppxPackage *Microsoft.Office.Desktop* | Remove-AppxPackage
 ### Get Help
 In the PowerShell, type:
 ```
-Get-AppxPackage -AllUsers *GetHelp* | Remove-AppxPackage
+Get-AppxPackage *GetHelp* | Remove-AppxPackage
 ```
 
 ### Feedback Hub
@@ -175,13 +169,13 @@ Get-AppxPackage *Microsoft.WindowsFeedbackHub* | Remove-AppxPackage
 ### Sticky Notes
 In the PowerShell, type: <br>
 ```
-Get-AppxPackage -AllUsers *sticky* | Remove-AppxPackage
+Get-AppxPackage *sticky* | Remove-AppxPackage
 ```
 
 ### Maps
 In the PowerShell, type: <br>
 ```
-Get-AppxPackage -AllUsers *maps* | Remove-AppxPackage
+Get-AppxPackage  *maps* | Remove-AppxPackage
 ```
 
 ### Removing Services
@@ -196,26 +190,26 @@ schtasks /Change /TN "\Microsoft\Windows\Maps\MapsToastTask" /disable
 ### OneNote
 In the PowerShell, type:
 ```
-Get-AppxPackage -AllUsers *onenote* | Remove-AppxPackage
+Get-AppxPackage  *onenote* | Remove-AppxPackage
 ```
 
 ### Photos
 In the PowerShell, type:
 ```
-Get-AppxPackage -AllUsers *photo* | Remove-AppxPackage
+Get-AppxPackage *photo* | Remove-AppxPackage
 ```
 Enable Classic Photoviewer using [WinAeroTweaker](https://winaero.com/download-winaero-tweaker/)
 
 ### Weather, News, ...
 In the PowerShell, type:
 ```
-Get-AppxPackage -AllUsers *bing* | Remove-AppxPackage
+Get-AppxPackage  *bing* | Remove-AppxPackage
 ```
 
 ### Sound Recorder
 In the PowerShell, type:
 ```
-Get-AppxPackage -AllUsers *soundrec* | Remove-AppxPackage
+Get-AppxPackage *soundrec* | Remove-AppxPackage
 ```
 Alternatives [Audacity](http://www.audacityteam.org/)
 
@@ -238,7 +232,7 @@ del "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDriv
 ### Your Phone
 In the PowerShell, type:
 ```
-Get-AppxPackage -AllUsers *phone* | Remove-AppxPackage
+Get-AppxPackage *phone* | Remove-AppxPackage
 ```
 
 ### Hello Face
@@ -255,14 +249,14 @@ schtasks /Change /TN "\Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
 ### Widgets (Windows Web Experience Pack)
 In the Powershell, type:
 ```
-Get-AppxPackage -AllUsers *WebExperience* | Remove-AppxPackage
+Get-AppxPackage *WebExperience* | Remove-AppxPackage
 ```
 When it's done removing, log out of your account, and log back in. The icon should be gone from taskbar and you shouldn't have Widgets option in taskbar settings.
 
 ### Microsoft Store 
 In the PowerShell, type: <br>
 ```
-Get-AppxPackage -AllUsers *store* | Remove-AppxPackage
+Get-AppxPackage *store* | Remove-AppxPackage
 ```
 You can ignore any error that pops up.<br>
 
@@ -287,7 +281,7 @@ sc delete PushToInstall
 ### Xbox and Game DVR
 In the PowerShell, type: <br>
 ```
-Get-AppxPackage -AllUsers *xbox* | Remove-AppxPackage
+Get-AppxPackage *xbox* | Remove-AppxPackage
 ```
 
 ### Removing Xbox services (not recommended if you are going to use it in future)
