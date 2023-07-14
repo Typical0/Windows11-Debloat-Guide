@@ -1,5 +1,3 @@
-:: This script was made originally by Echnobas (https://github.com/echnobas/sxs_offender)
-
 <# :
 @echo off &chcp 850 >nul &pushd "%~dp0"
 @set "0=%~f0" &powershell -nop -c $f=[IO.File]::ReadAllText($env:0)-split':bat2file\:.*';iex($f[1]); X(1)

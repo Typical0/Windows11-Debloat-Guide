@@ -52,7 +52,7 @@ It should error that someone has entered an incorrect password too many times. J
 3. Select Set up for work and school on the How would you like to set up this device screen. Click Next, select Sign-in options and choose Domain join instead. You should be on the local account screen.
 
 **Make sure you are doing this on a temporary user account because you'll be deleting this later on.** <br>
-Copy and paste the "install_wim_tweak.exe" to C:\Windows\System32 <br>
+Copy and paste the "install_wim_tweak.exe" to C:\Windows\System32 .<br>
 
 ![Screenshot (03)](https://user-images.githubusercontent.com/85176292/132123362-f68c5829-c739-4628-94be-7ca2dc27fb54.png)
 
@@ -69,7 +69,7 @@ Before debloating if you have recently updated your copy of Windows 11 or just f
 ```
 DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
-After the cleanup is done you can start debloating Windows 11. <br>
+After the cleanup is done, you can start debloating Windows 11. <br>
 
 ### **REMOVE ALL APPS AUTOMATICALLY**
 If you want to remove all the apps automatically, in the Powershell, type this:
@@ -184,7 +184,7 @@ In the PowerShell, type: <br>
 Get-AppxPackage -AllUsers *maps* | Remove-AppxPackage
 ```
 
-### Removing Services
+### Removing Maps Services
 In Command Prompt, type: <br>
 ```
 sc delete MapsBroker
@@ -227,7 +227,7 @@ Get-WindowsPackage -Online | Where PackageName -like *QuickAssist* | Remove-Wind
 ### OneDrive
 In the Command Promopt, type:
 ```
-%SystemRoot%\SysWOW64\OneDriveSetup.exe /uninstall
+%SystemRoot%\System32\OneDriveSetup.exe /uninstall
 rd "%UserProfile%\OneDrive" /s /q
 rd "%LocalAppData%\Microsoft\OneDrive" /s /q
 rd "%ProgramData%\Microsoft OneDrive" /s /q
@@ -272,7 +272,7 @@ install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r
 ```
 
-### Removing Services (Not Recommended if you are going to use any UWP app)
+### Removing Microsoft Store Services (not recommended if you are going to use any UWP app)
 
 In Command Prompt, type: <br>
 ```
@@ -290,7 +290,7 @@ In the PowerShell, type: <br>
 Get-AppxPackage -AllUsers *xbox* | Remove-AppxPackage
 ```
 
-### Removing Services (Not Recommended if you are going to use it in future)
+### Removing Xbox and Game DVR Services (not recommended if you are going to use it in future)
 In Command Prompt, type: <br>
 ```
 sc delete XblAuthManager
@@ -313,7 +313,7 @@ Now open powershell as Administrator and type: <br>
 ```
 cd %PROGRAMFILES(X86)%\Microsoft\Edge\Application\10*\Installer && setup --uninstall --force-uninstall --system-level
 ```
-Microsoft Edge is now uninstalled, but you still can see a broken icon on start menu to get rid off it open command prompt and type: <br>
+Microsoft Edge is now uninstalled, but you still can see a broken icon on start menu. To get rid off it open command prompt and type: <br>
 
 ![Screenshot (08)](https://user-images.githubusercontent.com/85176292/132125728-0bca64ec-243b-4d22-865a-2f17ac82d478.png)
 
@@ -322,7 +322,7 @@ install_wim_tweak.exe /o /l
 install_wim_tweak.exe /o /c "Microsoft-Windows-Internet-Browser-Package" /r
 install_wim_tweak.exe /h /o /l
 ```
-Restart is required after this (you can restart later when you are done debloating everything).
+Restart is required after this (you can restart later when you are done debloating everything). In 22H2 the broken icon doesn't appear anymore, so you can ignore it.
 
 In Powershell, type:
 ```
@@ -363,61 +363,13 @@ reg add "HKCU\Software\Microsoft\Internet Explorer\PhishingFilter" /v "EnabledV9
 
 ```
 
-To remove WinDefend, which is the main service, you need to: 
-1. Go to winaero.com and download Winaero Tweaker. Install it.
-2. In Tools section, you should find "Run as TrustedInstaller". In "Exectuable file" type regedit.exe. 
-![Screenshot 2023-01-28 041259](https://user-images.githubusercontent.com/81305501/215266309-738e2ff5-49b5-4de7-af64-5ea746cdedad.png)
-3. Press Enter.
-4. Go to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend.
-5. Right-click WinDefend, and select Delete from the context menu.
-
-![Screenshot 2023-01-28 (2)](https://user-images.githubusercontent.com/81305501/215266405-b47577fe-ea4f-41f6-86d4-80c3c413384b.png)
-
-6. When a permanent delete dialog appears, select Yes.
-
-![Screenshot 2023-01-28 042403](https://user-images.githubusercontent.com/81305501/215266726-fc6ebf26-0620-4020-9087-afad2a2592c6.png)
-
-7. Reboot your PC.
-Don't forget to backup the services. 
-
-After that use NTFS Access and take ownership of C:\Program Files\WindowsApps\ and C:\ProgramData\Microsoft\.
-
-![Screenshot (09)](https://user-images.githubusercontent.com/85176292/132126349-d91c4b65-f3c4-412e-a0c9-bba4c039ac30.png)
-
-In WindowsApps, delete the SecHealthUI folder.
-
-![Screenshot (10)](https://user-images.githubusercontent.com/85176292/132126362-c47be7df-d62f-4212-bd07-97714fd47041.png)
-
-In ProgramData\Microsoft, delete every folder related to Windows Defender.
-
-![Screenshot (11)](https://user-images.githubusercontent.com/85176292/132126653-1cbec29b-4c31-49f0-b596-b230913f4f30.png)
+To remove WinDefend, which is the main service of Windows Defender, you can use [this](https://github.com/Typical0/Windows11-Debloat-Guide/blob/dev/Files/Remove%20Defender.bat) script made originally by [Echnobas](https://www.github.com/Echnobas). After running it, you won't be able to restore Windows Defender, so please make a system restore point if you want to restore WinDefend back.
 
 ### Windows Defender (keeping definition updates and services)
 
 Just take the ownership of C:\Program Files\WindowsApps\ and C:\ProgramData\Microsoft <br>
 Then delete the SecHealthUI folder insider WindowsApps and every folder related to Windows Defender inside ProgramData. <br>
 Now disable Windows Defender through WinAeroTweaker.
-
-### Optimizing
-
-Now since you have removed all the bloatware let's just finally delete the leftovers from C:\Program Files\WindowsApps <br>
-Take the ownership as we did above. <br>
-Now delete folders according to what apps you removed... <br>
-
-For example, I've removed everything and kept Store, Xbox, Notepad (UWP) and Windows Terminal. <br>
-
-![Screenshot (12)](https://user-images.githubusercontent.com/85176292/132127306-370369f6-d9f0-4a39-87e4-9b1eaa35eef8.png)
-
-And here I've removed every bloatware. <br>
-
-![Screenshot (13)](https://user-images.githubusercontent.com/85176292/132127308-3c44ff88-4dd9-4595-a1c9-f868c77ff33c.png)
-
-Now create a new user account or enable Windows Administrator Account, log into it and voila! <br>
-You have successfully removed nearly all UWP apps from Windows 11!
-
-![Screenshot (14)](https://user-images.githubusercontent.com/85176292/132127314-a39be4cc-f084-4190-81e5-c44306db1edf.png)
-
-Unfortunately there is no way to remove "Get Started App" from the start menu without compromising the new Start Menu/taskbar so just pretend it's not there at all :)
 
 ### Removing Options from Settings Apps
 Now since you have removed the bloatware, it is recommended to remove the options related to them from the Settings.<br>
@@ -598,10 +550,9 @@ If you have two packages (like in previous screenshot), uninstall the newer one.
 
 ![214150565-0c3204ab-6c03-4a51-b49e-4f38c56195b4](https://user-images.githubusercontent.com/81305501/214152195-c86a5a5d-8b82-46ac-86ba-eb51abc12fdc.png)
 
-5. After reboot, your system will be stripped to barebones (forgot to debloat earlier)
- 
-![Windows 10 and later x64-2023-01-23-22-12-55](https://user-images.githubusercontent.com/81305501/214151238-e684c5e2-9e73-4ca9-b0af-2d2f0eb613e9.png)
+5. After reboot, your system will be stripped to barebones.
 
+![Windows 10 and later x64-2023-01-23-22-12-55](https://user-images.githubusercontent.com/81305501/214151238-e684c5e2-9e73-4ca9-b0af-2d2f0eb613e9.png)
 
 
 ## Congratulations! Your copy of Windows is now debloated & optimized!
@@ -609,6 +560,6 @@ More bloat will be added in the future, and I'll do what I can to keep this guid
 
 ## Credits 
 
-• This guide is based on Adolf Intel's [Windows 10 Privacy Guide](https://github.com/adolfintel/Windows10-Privacy) with many modifications to make it usable on Windows 11 <br>
-• Original Guide by The World Of PC#8783, this version is made by Typical#9480 <br>
+• This guide is based on Adolf Intel's [Windows 10 Privacy Guide](https://github.com/adolfintel/Windows10-Privacy) with many modifications to make it usable on Windows 11. <br>
+• Original Guide by The World Of PC#8783, this version is made by @typical0. <br>
 
