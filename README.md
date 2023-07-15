@@ -34,11 +34,11 @@ Last tested on Windows 11 22621.525.
 
 ### Before you debloat!
 At the end of the setup process, create a local account, don't use Cortana and turn off everything in the privacy settings. <br>
-
-![Screenshot (01)](https://user-images.githubusercontent.com/85176292/132122504-1412f80f-2bac-4671-93f0-fa5204082b59.png)
-![Screenshot (02)](https://user-images.githubusercontent.com/85176292/132122505-95823c80-06cc-4037-a48a-7e4a2e0a904a.png)
+![Windows 10 and later x64 (2)-2023-07-14-19-06-09](https://github.com/Typical0/Windows11-Debloat-Guide/assets/81305501/f66b2c16-6053-44ee-afbc-e6840b0d4f00)
+![Windows 10 and later x64 (2)-2023-07-14-19-06-09](https://github.com/Typical0/Windows11-Debloat-Guide/assets/81305501/40b12b5c-a113-45a3-9561-3321bb70600a)
 
 To create a local user account in Windows 11 22H2 (doesn't include Enterprise/Education), you can go with 3 alternative options:
+
 
 1. When you should connect to a Internet, press Shift+F10 and type in Command Prompt:
 ```oobe\bypassnro```.
@@ -303,41 +303,19 @@ schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTaskLogon" /disable
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t REG_DWORD /d 0 /f
 ```
 
-### Microsoft Edge (Chromium)
+### Microsoft Edge (Old)
 
-**DOESN'T WORK ANYMORE IN NEWER VERSIONS**
+As of version 115, the old way of uninstalling Microsoft Edge has been patched. You can remove the icon from Start by right clicking it, selecting More -> Open File Location and removing the shortcut. In 21H2, the broken MS Edge icon will appear. 
 
-![Screenshot (07)](https://user-images.githubusercontent.com/85176292/132125057-ab8b2dbb-bb0a-4dc3-88c2-418f683e5332.png)
-
-Now open powershell as Administrator and type: <br>
-```
-cd %PROGRAMFILES(X86)%\Microsoft\Edge\Application\10*\Installer && setup --uninstall --force-uninstall --system-level
-```
-Microsoft Edge is now uninstalled, but you still can see a broken icon on start menu. To get rid off it open command prompt and type: <br>
-
-![Screenshot (08)](https://user-images.githubusercontent.com/85176292/132125728-0bca64ec-243b-4d22-865a-2f17ac82d478.png)
-
+To remove it, type in Command Prompt: <br>
 ```
 install_wim_tweak.exe /o /l
 install_wim_tweak.exe /o /c "Microsoft-Windows-Internet-Browser-Package" /r
 install_wim_tweak.exe /h /o /l
 ```
-Restart is required after this (you can restart later when you are done debloating everything). In 22H2 the broken icon doesn't appear anymore, so you can ignore it.
-
-In Powershell, type:
-```
-Get-AppxPackage -AllUsers *GetHelp* | Remove-AppxPackage
-```
+Restart is required after this (you can restart later when you are done debloating everything). In 22H2, the broken icon doesn't appear anymore, so you can ignore it.
 
 ### Windows Defender (removing dependency updates and services)
-
-If you want to backup all services, in the command prompt, type:
-```
-reg export HKLM\System\CurrentControlSet\Services\Sense Sense.reg
-reg export HKLM\System\CurrentControlSet\Services\SecurityHealthService SecurityHealthService.reg
-reg export HKLM\System\CurrentControlSet\Services\WinDefend WinDefend.reg
-```
-Copy them somewhere else, and apply them, if you plan to restore Windows Defender.
 
 To remove Windows Defender, in the command prompt, type:
 ```
