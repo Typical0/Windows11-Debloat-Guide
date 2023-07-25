@@ -317,6 +317,14 @@ Restart is required after this (you can restart later when you are done debloati
 
 ### Windows Defender (removing dependency updates and services)
 
+If you want to backup all services, in the command prompt, type:
+```
+reg export HKLM\System\CurrentControlSet\Services\Sense Sense.reg
+reg export HKLM\System\CurrentControlSet\Services\SecurityHealthService SecurityHealthService.reg
+reg export HKLM\System\CurrentControlSet\Services\WinDefend WinDefend.reg
+```
+Copy them somewhere else, and apply them, if you plan to restore Windows Defender.
+
 To remove Windows Defender, in the command prompt, type:
 ```
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f
@@ -341,7 +349,34 @@ reg add "HKCU\Software\Microsoft\Internet Explorer\PhishingFilter" /v "EnabledV9
 
 ```
 
-To remove WinDefend, which is the main service of Windows Defender, you can use [this](https://github.com/Typical0/Windows11-Debloat-Guide/blob/dev/Files/Remove%20Defender.bat) script made originally by [Echnobas](https://www.github.com/Echnobas). After running it, you won't be able to restore Windows Defender, so please make a system restore point if you want to restore WinDefend back.
+To remove WinDefend, which is the main service, you need to: 
+1. Go to winaero.com and download Winaero Tweaker. Install it.
+2. In Tools section, you should find "Run as TrustedInstaller". In "Exectuable file" type regedit.exe. 
+![Screenshot 2023-01-28 041259](https://user-images.githubusercontent.com/81305501/215266309-738e2ff5-49b5-4de7-af64-5ea746cdedad.png)
+3. Press Enter.
+4. Go to HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend.
+5. Right-click WinDefend, and select Delete from the context menu.
+
+![Screenshot 2023-01-28 (2)](https://user-images.githubusercontent.com/81305501/215266405-b47577fe-ea4f-41f6-86d4-80c3c413384b.png)
+
+6. When a permanent delete dialog appears, select Yes.
+
+![Screenshot 2023-01-28 042403](https://user-images.githubusercontent.com/81305501/215266726-fc6ebf26-0620-4020-9087-afad2a2592c6.png)
+
+7. Reboot your PC.
+Don't forget to backup the services. 
+
+After that use NTFS Access and take ownership of C:\Program Files\WindowsApps\ and C:\ProgramData\Microsoft\.
+
+![Screenshot (09)](https://user-images.githubusercontent.com/85176292/132126349-d91c4b65-f3c4-412e-a0c9-bba4c039ac30.png)
+
+In WindowsApps, delete the SecHealthUI folder.
+
+![Screenshot (10)](https://user-images.githubusercontent.com/85176292/132126362-c47be7df-d62f-4212-bd07-97714fd47041.png)
+
+In ProgramData\Microsoft, delete every folder related to Windows Defender.
+
+![Screenshot (11)](https://user-images.githubusercontent.com/85176292/132126653-1cbec29b-4c31-49f0-b596-b230913f4f30.png)
 
 ### Windows Defender (keeping definition updates and services)
 
