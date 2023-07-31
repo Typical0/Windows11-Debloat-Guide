@@ -71,7 +71,7 @@ DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
 After the cleanup is done, you can start debloating Windows 11. <br>
 
-## Remove built-in apps
+## Remove built-in UWP apps
 
 ### Alarms and Clock
 In the PowerShell, type:
@@ -170,17 +170,6 @@ In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *Microsoft.MicrosoftSolitaireCollection* | Remove-AppxPackage
 ```
-### Microsoft Edge (Old)
-
-As of version 115, the old way of uninstalling Microsoft Edge has been patched. You can remove the icon from Start by right clicking it, selecting More -> Open File Location and removing the shortcut. In 21H2, the broken MS Edge icon will appear. 
-
-To remove it, type in Command Prompt: <br>
-```
-install_wim_tweak.exe /o /l
-install_wim_tweak.exe /o /c "Microsoft-Windows-Internet-Browser-Package" /r
-install_wim_tweak.exe /h /o /l
-```
-Restart is required after this (you can restart later when you are done debloating everything). In 22H2 and above, the broken icon doesn't appear anymore, so you can ignore this section.
 
 ### Microsoft Store 
 In the PowerShell, type: <br>
@@ -232,16 +221,6 @@ In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *onenote* | Remove-AppxPackage
 ```
-### OneDrive
-In the Command Promopt, type:
-```
-%SystemRoot%\System32\OneDriveSetup.exe /uninstall
-rd "%UserProfile%\OneDrive" /s /q
-rd "%LocalAppData%\Microsoft\OneDrive" /s /q
-rd "%ProgramData%\Microsoft OneDrive" /s /q
-rd "C:\OneDriveTemp" /s /q
-del "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk" /s /f /q
-```
 
 ### Photos
 In the PowerShell, type:
@@ -282,6 +261,70 @@ Get-AppxPackage -AllUsers *WebExperience* | Remove-AppxPackage
 ```
 When it's done removing, log out of your account, and log back in. You shouldn't have Widgets option in taskbar settings.
 
+### Xbox and Game DVR
+In the PowerShell, type: <br>
+```
+Get-AppxPackage -AllUsers *xbox* | Remove-AppxPackage
+```
+
+### Removing Xbox and Game DVR Services (not recommended if you are going to use it in future)
+In Command Prompt, type: <br>
+```
+sc delete XblAuthManager
+sc delete XblGameSave
+sc delete XboxNetApiSvc
+sc delete XboxGipSvc
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\xbgm" /f
+schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTask" /disable
+schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTaskLogon" /disable
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t REG_DWORD /d 0 /f
+```
+
+### Optimizing
+
+Since you have removed all the UWP apps, you can delete the leftovers from C:\Program Files\WindowsApps. <br>
+Take the ownership as we did above. <br>
+Now delete folders according to what apps, you've removed. <br>
+
+For example, I've removed everything and kept Store, Xbox, Notepad (UWP) and Windows Terminal. <br>
+
+![Screenshot (12)](https://user-images.githubusercontent.com/85176292/132127306-370369f6-d9f0-4a39-87e4-9b1eaa35eef8.png)
+
+And here I've removed every app. <br>
+
+![Screenshot (13)](https://user-images.githubusercontent.com/85176292/132127308-3c44ff88-4dd9-4595-a1c9-f868c77ff33c.png)
+
+Now create a new user account or enable Windows Administrator account, log into it and voila! <br>
+You have successfully removed nearly all UWP apps from Windows 11!
+
+![Screenshot (14)](https://user-images.githubusercontent.com/85176292/132127314-a39be4cc-f084-4190-81e5-c44306db1edf.png)
+
+Unfortunately there is no way to remove "Get Started" and "Windows Backup" (23466.1001+) from the start menu without compromising the new Start Menu/taskbar so just pretend it's not there at all :)
+
+## Remove other built-in applications
+
+### Microsoft Edge
+
+As of version 115, the old way of uninstalling Microsoft Edge has been patched. You can remove the icon from Start by right clicking it, selecting More -> Open File Location and removing the shortcut. In 21H2, the broken MS Edge icon will appear. 
+
+To remove it, type in Command Prompt: <br>
+```
+install_wim_tweak.exe /o /l
+install_wim_tweak.exe /o /c "Microsoft-Windows-Internet-Browser-Package" /r
+install_wim_tweak.exe /h /o /l
+```
+Restart is required after this (you can restart later when you are done debloating everything). In 22H2 and above, the broken icon doesn't appear anymore, so you can ignore this section.
+
+### OneDrive
+In the Command Promopt, type:
+```
+%SystemRoot%\System32\OneDriveSetup.exe /uninstall
+rd "%UserProfile%\OneDrive" /s /q
+rd "%LocalAppData%\Microsoft\OneDrive" /s /q
+rd "%ProgramData%\Microsoft OneDrive" /s /q
+rd "C:\OneDriveTemp" /s /q
+del "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk" /s /f /q
+```
 
 ### Windows Defender (removing dependency updates and services)
 
@@ -352,48 +395,7 @@ Just take the ownership of C:\Program Files\WindowsApps\ and C:\ProgramData\Micr
 Then delete the SecHealthUI folder insider WindowsApps and every folder related to Windows Defender inside ProgramData. <br>
 Now disable Windows Defender through WinAeroTweaker.
 
-### Xbox and Game DVR
-In the PowerShell, type: <br>
-```
-Get-AppxPackage -AllUsers *xbox* | Remove-AppxPackage
-```
-
-### Removing Xbox and Game DVR Services (not recommended if you are going to use it in future)
-In Command Prompt, type: <br>
-```
-sc delete XblAuthManager
-sc delete XblGameSave
-sc delete XboxNetApiSvc
-sc delete XboxGipSvc
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\xbgm" /f
-schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTask" /disable
-schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTaskLogon" /disable
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t REG_DWORD /d 0 /f
-```
-
-### Optimizing
-
-Since you have removed all the UWP apps, you can delete the leftovers from C:\Program Files\WindowsApps. <br>
-Take the ownership as we did above. <br>
-Now delete folders according to what apps, you've removed. <br>
-
-For example, I've removed everything and kept Store, Xbox, Notepad (UWP) and Windows Terminal. <br>
-
-![Screenshot (12)](https://user-images.githubusercontent.com/85176292/132127306-370369f6-d9f0-4a39-87e4-9b1eaa35eef8.png)
-
-And here I've removed every app. <br>
-
-![Screenshot (13)](https://user-images.githubusercontent.com/85176292/132127308-3c44ff88-4dd9-4595-a1c9-f868c77ff33c.png)
-
-Now create a new user account or enable Windows Administrator account, log into it and voila! <br>
-You have successfully removed nearly all UWP apps from Windows 11!
-
-![Screenshot (14)](https://user-images.githubusercontent.com/85176292/132127314-a39be4cc-f084-4190-81e5-c44306db1edf.png)
-
-Unfortunately there is no way to remove "Get Started" and "Windows Backup" (23466.1001+) from the start menu without compromising the new Start Menu/taskbar so just pretend it's not there at all :)
-
-## Remove bloatware services and tasks
-
+## Remove services and tasks
 ### Removing Options from Settings Apps
 Now since you have removed the bloatware, it is recommended to remove the options related to them from the Settings.<br>
 Open Regedit and go to `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer` <br>
