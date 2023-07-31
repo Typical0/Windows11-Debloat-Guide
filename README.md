@@ -71,6 +71,8 @@ DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
 After the cleanup is done, you can start debloating Windows 11. <br>
 
+## Remove built-in apps
+
 ### Alarms and Clock
 In the PowerShell, type:
 ```
@@ -119,17 +121,96 @@ In the PowerShell, type:
 Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage
 ```
 
-### Media Player, Movies & TV
+### Feedback Hub
+In the PowerShell, type:
+```
+Get-AppxPackage *Microsoft.WindowsFeedbackHub* | Remove-AppxPackage
+```
+
+### Get Help
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *GetHelp* | Remove-AppxPackage
+```
+
+### Hello Face
+In the PowerShell, type:
+```
+Get-WindowsPackage -Online | Where PackageName -like *Hello-Face* | Remove-WindowsPackage -Online -NoRestart
+```
+
+In the command prompt, type:
+```
+schtasks /Change /TN "\Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
+```
+
+### Maps
+In the PowerShell, type: <br>
+```
+Get-AppxPackage -AllUsers *maps* | Remove-AppxPackage
+```
+
+### Maps related services
+In Command Prompt, type: <br>
+```
+sc delete MapsBroker
+sc delete lfsvc
+schtasks /Change /TN "\Microsoft\Windows\Maps\MapsUpdateTask" /disable
+schtasks /Change /TN "\Microsoft\Windows\Maps\MapsToastTask" /disable
+```
+
+### Media Player (UWP), Movies & TV
 In the PowerShell, type: <br>
 ```
 Get-AppxPackage -AllUsers *zune* | Remove-AppxPackage
-Get-WindowsPackage -Online | Where PackageName -like *MediaPlayer* | Remove-WindowsPackage -Online -NoRestart
 ```
 
 ### Microsoft Solitare Collection
 In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *Microsoft.MicrosoftSolitaireCollection* | Remove-AppxPackage
+```
+### Microsoft Edge (Old)
+
+As of version 115, the old way of uninstalling Microsoft Edge has been patched. You can remove the icon from Start by right clicking it, selecting More -> Open File Location and removing the shortcut. In 21H2, the broken MS Edge icon will appear. 
+
+To remove it, type in Command Prompt: <br>
+```
+install_wim_tweak.exe /o /l
+install_wim_tweak.exe /o /c "Microsoft-Windows-Internet-Browser-Package" /r
+install_wim_tweak.exe /h /o /l
+```
+Restart is required after this (you can restart later when you are done debloating everything). In 22H2 and above, the broken icon doesn't appear anymore, so you can ignore this section.
+
+### Microsoft Store 
+In the PowerShell, type: <br>
+```
+Get-AppxPackage -AllUsers *store* | Remove-AppxPackage
+```
+Ignore any error that pops up.<br>
+
+In Command Prompt, type: <br>
+```
+install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
+install_wim_tweak /o /c Microsoft-Windows-Store /r
+```
+
+### Microsoft Store Services (not recommended if you are going to use any UWP app)
+
+In Command Prompt, type: <br>
+```
+reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v RemoveWindowsStore /t REG_DWORD /d 1 /f
+reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v DisableStoreApps /t REG_DWORD /d 1 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\PushToInstall" /v DisablePushToInstall /t REG_DWORD /d 1 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SilentInstalledAppsEnabled /t REG_DWORD /d 0 /f
+sc delete PushToInstall
+```
+
+### Microsoft Quick Assist
+In the PowerShell, type:
+```
+Get-WindowsPackage -Online | Where PackageName -like *QuickAssist* | Remove-WindowsPackage -Online -NoRestart
 ```
 
 ### Office
@@ -146,69 +227,10 @@ In the PowerShell, type:
 Get-AppxPackage -AllUsers *OutlookForWindows* | Remove-AppxPackage
 ```
 
-### Get Help
-In the PowerShell, type:
-```
-Get-AppxPackage -AllUsers *GetHelp* | Remove-AppxPackage
-```
-
-### Feedback Hub
-In the PowerShell, type:
-```
-Get-AppxPackage *Microsoft.WindowsFeedbackHub* | Remove-AppxPackage
-```
-
-### Sticky Notes
-In the PowerShell, type: <br>
-```
-Get-AppxPackage -AllUsers *sticky* | Remove-AppxPackage
-```
-
-### Maps
-In the PowerShell, type: <br>
-```
-Get-AppxPackage -AllUsers *maps* | Remove-AppxPackage
-```
-
-### Removing Maps Services
-In Command Prompt, type: <br>
-```
-sc delete MapsBroker
-sc delete lfsvc
-schtasks /Change /TN "\Microsoft\Windows\Maps\MapsUpdateTask" /disable
-schtasks /Change /TN "\Microsoft\Windows\Maps\MapsToastTask" /disable
-```
-
 ### OneNote
 In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *onenote* | Remove-AppxPackage
-```
-
-### Photos
-In the PowerShell, type:
-```
-Get-AppxPackage -AllUsers *photo* | Remove-AppxPackage
-```
-Enable Classic Photoviewer using [WinAeroTweaker](https://winaero.com/download-winaero-tweaker/)
-
-### Weather, News, ...
-In the PowerShell, type:
-```
-Get-AppxPackage -AllUsers *bing* | Remove-AppxPackage
-```
-
-### Sound Recorder
-In the PowerShell, type:
-```
-Get-AppxPackage -AllUsers *soundrec* | Remove-AppxPackage
-```
-Alternatives [Audacity](http://www.audacityteam.org/)
-
-### Microsoft Quick Assist
-In the PowerShell, type:
-```
-Get-WindowsPackage -Online | Where PackageName -like *QuickAssist* | Remove-WindowsPackage -Online -NoRestart
 ```
 ### OneDrive
 In the Command Promopt, type:
@@ -221,85 +243,45 @@ rd "C:\OneDriveTemp" /s /q
 del "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk" /s /f /q
 ```
 
+### Photos
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *photo* | Remove-AppxPackage
+```
+Enable Classic Photoviewer using [WinAeroTweaker](https://winaero.com/download-winaero-tweaker/)
+
+### Sound Recorder
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *soundrec* | Remove-AppxPackage
+```
+Alternatives [Audacity](http://www.audacityteam.org/)
+
+### Sticky Notes
+In the PowerShell, type: <br>
+```
+Get-AppxPackage -AllUsers *sticky* | Remove-AppxPackage
+```
+
 ### Your Phone
 In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *phone* | Remove-AppxPackage
 ```
 
-### Hello Face
+### Weather, News, ...
 In the PowerShell, type:
 ```
-Get-WindowsPackage -Online | Where PackageName -like *Hello-Face* | Remove-WindowsPackage -Online -NoRestart
+Get-AppxPackage -AllUsers *bing* | Remove-AppxPackage
 ```
 
-In the command prompt, type:
-```
-schtasks /Change /TN "\Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
-```
-
-### Widgets (Windows Web Experience Pack)
+### Windows Web Experience Pack
 In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *WebExperience* | Remove-AppxPackage
 ```
 When it's done removing, log out of your account, and log back in. You shouldn't have Widgets option in taskbar settings.
 
-### Microsoft Store 
-In the PowerShell, type: <br>
-```
-Get-AppxPackage -AllUsers *store* | Remove-AppxPackage
-```
-You can ignore any error that pops up.<br>
-
-In Command Prompt, type: <br>
-```
-install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
-install_wim_tweak /o /c Microsoft-Windows-Store /r
-```
-
-### Removing Microsoft Store Services (not recommended if you are going to use any UWP app)
-
-In Command Prompt, type: <br>
-```
-reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v RemoveWindowsStore /t REG_DWORD /d 1 /f
-reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v DisableStoreApps /t REG_DWORD /d 1 /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d 0 /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\PushToInstall" /v DisablePushToInstall /t REG_DWORD /d 1 /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v SilentInstalledAppsEnabled /t REG_DWORD /d 0 /f
-sc delete PushToInstall
-```
-
-### Xbox and Game DVR
-In the PowerShell, type: <br>
-```
-Get-AppxPackage -AllUsers *xbox* | Remove-AppxPackage
-```
-
-### Removing Xbox and Game DVR Services (not recommended if you are going to use it in future)
-In Command Prompt, type: <br>
-```
-sc delete XblAuthManager
-sc delete XblGameSave
-sc delete XboxNetApiSvc
-sc delete XboxGipSvc
-reg delete "HKLM\SYSTEM\CurrentControlSet\Services\xbgm" /f
-schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTask" /disable
-schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTaskLogon" /disable
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t REG_DWORD /d 0 /f
-```
-
-### Microsoft Edge (Old)
-
-As of version 115, the old way of uninstalling Microsoft Edge has been patched. You can remove the icon from Start by right clicking it, selecting More -> Open File Location and removing the shortcut. In 21H2, the broken MS Edge icon will appear. 
-
-To remove it, type in Command Prompt: <br>
-```
-install_wim_tweak.exe /o /l
-install_wim_tweak.exe /o /c "Microsoft-Windows-Internet-Browser-Package" /r
-install_wim_tweak.exe /h /o /l
-```
-Restart is required after this (you can restart later when you are done debloating everything). In 22H2, the broken icon doesn't appear anymore, so you can ignore it.
 
 ### Windows Defender (removing dependency updates and services)
 
@@ -369,6 +351,48 @@ In ProgramData\Microsoft, delete every folder related to Windows Defender.
 Just take the ownership of C:\Program Files\WindowsApps\ and C:\ProgramData\Microsoft <br>
 Then delete the SecHealthUI folder insider WindowsApps and every folder related to Windows Defender inside ProgramData. <br>
 Now disable Windows Defender through WinAeroTweaker.
+
+### Xbox and Game DVR
+In the PowerShell, type: <br>
+```
+Get-AppxPackage -AllUsers *xbox* | Remove-AppxPackage
+```
+
+### Removing Xbox and Game DVR Services (not recommended if you are going to use it in future)
+In Command Prompt, type: <br>
+```
+sc delete XblAuthManager
+sc delete XblGameSave
+sc delete XboxNetApiSvc
+sc delete XboxGipSvc
+reg delete "HKLM\SYSTEM\CurrentControlSet\Services\xbgm" /f
+schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTask" /disable
+schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTaskLogon" /disable
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t REG_DWORD /d 0 /f
+```
+
+### Optimizing
+
+Since you have removed all the UWP apps, you can delete the leftovers from C:\Program Files\WindowsApps. <br>
+Take the ownership as we did above. <br>
+Now delete folders according to what apps, you've removed. <br>
+
+For example, I've removed everything and kept Store, Xbox, Notepad (UWP) and Windows Terminal. <br>
+
+![Screenshot (12)](https://user-images.githubusercontent.com/85176292/132127306-370369f6-d9f0-4a39-87e4-9b1eaa35eef8.png)
+
+And here I've removed every app. <br>
+
+![Screenshot (13)](https://user-images.githubusercontent.com/85176292/132127308-3c44ff88-4dd9-4595-a1c9-f868c77ff33c.png)
+
+Now create a new user account or enable Windows Administrator account, log into it and voila! <br>
+You have successfully removed nearly all UWP apps from Windows 11!
+
+![Screenshot (14)](https://user-images.githubusercontent.com/85176292/132127314-a39be4cc-f084-4190-81e5-c44306db1edf.png)
+
+Unfortunately there is no way to remove "Get Started" and "Windows Backup" (23466.1001+) from the start menu without compromising the new Start Menu/taskbar so just pretend it's not there at all :)
+
+## Remove bloatware services and tasks
 
 ### Removing Options from Settings Apps
 Now since you have removed the bloatware, it is recommended to remove the options related to them from the Settings.<br>
