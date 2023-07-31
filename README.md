@@ -71,15 +71,8 @@ DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
 After the cleanup is done, you can start debloating Windows 11. <br>
 
-### **REMOVE ALL APPS AUTOMATICALLY**
-If you want to remove all the apps automatically, in the Powershell, type this:
-```
-Get-AppxPackage | Remove-AppxPackage
-```
-Ignore all the errors. If you prefer to delete all apps manually, start from Alarms and Clock section.
-
 ### Alarms and Clock
-In the Powershell, type:
+In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *alarms* | Remove-AppxPackage
 Get-AppxPackage -AllUsers *people* | Remove-AppxPackage
@@ -93,15 +86,8 @@ Get-AppxPackage -AllUsers *calc* | Remove-AppxPackage
 ```
 Download Classic Calulator from [Here](https://winaero.com/get-calculator-from-windows-8-and-windows-7-in-windows-10/)
 
-### Mail, Calendar, ...
-In the PowerShell, type:
-```
-Get-AppxPackage -AllUsers *comm* | Remove-AppxPackage
-Get-AppxPackage -AllUsers *mess* | Remove-AppxPackage
-```
-
 ### Clipchamp, Quick Assist and Family
-In the Powershell, type:
+In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *Clipchamp* | Remove-AppxPackage
 Get-AppxPackage -AllUsers *QuickAssist* | Remove-AppxPackage
@@ -116,48 +102,48 @@ Get-AppxPackage -AllUsers *camera* | Remove-AppxPackage
 Ignore any error that pops up
 
 ### Connect
-In the command prompt, type:
+In the Command Prompt, type:
 ```
 install_wim_tweak /o /c Microsoft-PPIProjection-Package /r
 ```
 
 ### Contact Support, Get Help
-In the command prompt, type:
+In the Command Prompt, type:
 ```
 install_wim_tweak /o /c Microsoft-Windows-ContactSupport /r
 ```
 
 ### Cortana (UWP App)
-In the powershell, type:
+In the PowerShell, type:
 ```
 Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage
 ```
 
-### Music, TV
+### Media Player, Movies & TV
 In the PowerShell, type: <br>
 ```
 Get-AppxPackage -AllUsers *zune* | Remove-AppxPackage
 Get-WindowsPackage -Online | Where PackageName -like *MediaPlayer* | Remove-WindowsPackage -Online -NoRestart
 ```
 
-### Groove Music
-In the PowerShell, type:
-```
-Get-AppxPackage -AllUsers *zune* | Remove-AppxPackage
-```
-
 ### Microsoft Solitare Collection
 In the PowerShell, type:
 ```
-Get-AppxPackage *Microsoft.MicrosoftSolitaireCollection* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *Microsoft.MicrosoftSolitaireCollection* | Remove-AppxPackage
 ```
 
 ### Office
 In the PowerShell, type:
 ```
-Get-AppxPackage *Microsoft.MicrosoftOfficeHub* | Remove-AppxPackage
-Get-AppxPackage *Microsoft.Office.Sway* | Remove-AppxPackage
-Get-AppxPackage *Microsoft.Office.Desktop* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *Microsoft.MicrosoftOfficeHub* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *Microsoft.Office.Sway* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *Microsoft.Office.Desktop* | Remove-AppxPackage
+```
+
+### Outlook (25306+)
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *OutlookForWindows* | Remove-AppxPackage
 ```
 
 ### Get Help
@@ -253,7 +239,7 @@ schtasks /Change /TN "\Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
 ```
 
 ### Widgets (Windows Web Experience Pack)
-In the Powershell, type:
+In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *WebExperience* | Remove-AppxPackage
 ```
