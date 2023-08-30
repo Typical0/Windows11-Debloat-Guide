@@ -93,6 +93,7 @@ Get-AppxPackage  *calc* | Remove-AppxPackage
 ```
 Download Classic Calulator from [Here](https://winaero.com/get-calculator-from-windows-8-and-windows-7-in-windows-10/)
 
+<<<<<<< Updated upstream
 ### Mail, Calendar, ...
 In the PowerShell, type:
 ```
@@ -106,6 +107,12 @@ In the Powershell, type:
 Get-AppxPackage *Clipchamp* | Remove-AppxPackage
 Get-AppxPackage *QuickAssist* | Remove-AppxPackage
 Get-AppxPackage *Family* | Remove-AppxPackage
+=======
+### Clipchamp (22H2+)
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *Clipchamp* | Remove-AppxPackage
+>>>>>>> Stashed changes
 ```
 
 ### Camera
@@ -121,8 +128,13 @@ In the command prompt, type:
 install_wim_tweak /o /c Microsoft-PPIProjection-Package /r
 ```
 
+<<<<<<< Updated upstream
 ### Contact Support, Get Help
 In the command prompt, type:
+=======
+### Contact Support
+In the Command Prompt, type:
+>>>>>>> Stashed changes
 ```
 install_wim_tweak /o /c Microsoft-Windows-ContactSupport /r
 ```
@@ -159,6 +171,13 @@ In the PowerShell, type:
 ```
 Get-AppxPackage *GetHelp* | Remove-AppxPackage
 ```
+
+### Family (22H2+)
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *Family* | Remove-AppxPackage
+```
+
 
 ### Feedback Hub
 In the PowerShell, type:
@@ -241,26 +260,60 @@ In the PowerShell, type:
 Get-WindowsPackage -Online | Where PackageName -like *Hello-Face* | Remove-WindowsPackage -Online -NoRestart
 ```
 
-In the command prompt, type:
+In the Command Prompt, type:
 ```
 schtasks /Change /TN "\Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
 ```
 
+<<<<<<< Updated upstream
 ### Widgets (Windows Web Experience Pack)
 In the Powershell, type:
 ```
 Get-AppxPackage *WebExperience* | Remove-AppxPackage
+=======
+### Mail and Calendar
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *windowscommunicationsapps* | Remove-AppxPackage
+```
+
+### Maps
+In the PowerShell, type: 
+```
+Get-AppxPackage -AllUsers *maps* | Remove-AppxPackage
+```
+
+### Maps related services
+In Command Prompt, type:
+```
+sc delete MapsBroker
+sc delete lfsvc
+schtasks /Change /TN "\Microsoft\Windows\Maps\MapsUpdateTask" /disable
+schtasks /Change /TN "\Microsoft\Windows\Maps\MapsToastTask" /disable
+```
+
+### Media Player (UWP), Movies & TV
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *zune* | Remove-AppxPackage
+```
+
+### Microsoft Solitare Collection
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *Microsoft.MicrosoftSolitaireCollection* | Remove-AppxPackage
+>>>>>>> Stashed changes
 ```
 When it's done removing, log out of your account, and log back in. The icon should be gone from taskbar and you shouldn't have Widgets option in taskbar settings.
 
 ### Microsoft Store 
-In the PowerShell, type: <br>
+In the PowerShell, type:
 ```
 Get-AppxPackage *store* | Remove-AppxPackage
 ```
 You can ignore any error that pops up.<br>
 
-In Command Prompt, type: <br>
+In Command Prompt, type:
 ```
 install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
 install_wim_tweak /o /c Microsoft-Windows-Store /r
@@ -268,7 +321,7 @@ install_wim_tweak /o /c Microsoft-Windows-Store /r
 
 ### Removing Windows Store services (not recommended if you are going to use any UWP app)
 
-In Command Prompt, type: <br>
+In Command Prompt, type:
 ```
 reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v RemoveWindowsStore /t REG_DWORD /d 1 /f
 reg add "HKLM\Software\Policies\Microsoft\WindowsStore" /v DisableStoreApps /t REG_DWORD /d 1 /f
@@ -278,14 +331,130 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 sc delete PushToInstall
 ```
 
-### Xbox and Game DVR
-In the PowerShell, type: <br>
+<<<<<<< Updated upstream
+=======
+### Microsoft Teams
+In the PowerShell, type:
 ```
+Get-AppxPackage -AllUsers *MicrosoftTeams* | Remove-AppxPackage
+```
+
+### Microsoft To Do
+In the PowerShell, type:
+```
+Get-AppxPackage -Allusers *Todos* | Remove-AppxPackage
+```
+
+### Microsoft Quick Assist
+In the PowerShell, type:
+```
+Get-WindowsPackage -Online | Where PackageName -like *QuickAssist* | Remove-WindowsPackage -Online -NoRestart
+Get-AppxPackage -AllUsers *QuickAssist* | Remove-AppxPackage
+```
+
+### Notepad & Paint
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *notepad* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *paint* | Remove-AppxPackage
+```
+
+### Office
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *Microsoft.MicrosoftOfficeHub* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *Microsoft.Office.Sway* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *Microsoft.Office.Desktop* | Remove-AppxPackage
+```
+
+### Outlook (25306+)
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *OutlookForWindows* | Remove-AppxPackage
+```
+
+### OneNote
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *onenote* | Remove-AppxPackage
+```
+
+### Photos
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *photo* | Remove-AppxPackage
+```
+Enable Classic Photoviewer using [WinAeroTweaker](https://winaero.com/download-winaero-tweaker/)
+
+### Sound Recorder
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *soundrec* | Remove-AppxPackage
+```
+Alternatives [Audacity](http://www.audacityteam.org/)
+
+### Sticky Notes
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *sticky* | Remove-AppxPackage
+```
+
+### Snipping Tool
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *ScreenSsketch* | Remove-AppxPackage
+```
+
+### Tips
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *Microsoft.GetStarted* | Remove-AppxPackage
+```
+
+
+### Your Phone
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *phone* | Remove-AppxPackage
+```
+
+### Weather, News, ...
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *bing* | Remove-AppxPackage
+```
+
+### Windows Terminal
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *WindowsTerminal* | Remove-AppxPackage
+```
+
+### Windows Web Experience Pack
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *WebExperience* | Remove-AppxPackage
+```
+When it's done removing, log out of your account, and log back in. You shouldn't have Widgets option in taskbar settings.
+
+>>>>>>> Stashed changes
+### Xbox and Game DVR
+In the PowerShell, type:
+```
+<<<<<<< Updated upstream
 Get-AppxPackage *xbox* | Remove-AppxPackage
 ```
 
 ### Removing Xbox services (not recommended if you are going to use it in future)
 In Command Prompt, type: <br>
+=======
+Get-AppxPackage -AllUsers *xbox* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *GamingApp* | Remove-AppxPackage
+```
+
+### Removing Xbox and Game DVR Services (not recommended if you are going to use it in future)
+In Command Prompt, type:
+>>>>>>> Stashed changes
 ```
 sc delete XblAuthManager
 sc delete XblGameSave
@@ -387,6 +556,7 @@ Just take the ownership of C:\Program Files\WindowsApps\ and C:\ProgramData\Micr
 Then delete the SecHealthUI folder insider WindowsApps and every folder related to Windows Defender inside ProgramData. <br>
 Now disable Windows Defender through WinAeroTweaker.
 
+<<<<<<< Updated upstream
 ### Optimizing
 
 Since you have removed all the bloatware, you can delete the leftovers from C:\Program Files\WindowsApps <br>
@@ -407,6 +577,9 @@ You have successfully removed nearly all UWP apps from Windows 11!
 ![Screenshot (14)](https://user-images.githubusercontent.com/85176292/132127314-a39be4cc-f084-4190-81e5-c44306db1edf.png)
 
 Unfortunately there is no way to remove "Get Started App" from the start menu without compromising the new Start Menu/taskbar so just pretend it's not there at all :)
+=======
+## Basic Tweaking
+>>>>>>> Stashed changes
 
 ### Removing Options from Settings Apps
 Now since you have removed the bloatware, it is recommended to remove the options related to them from the Settings.<br>
@@ -511,7 +684,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 ```
 
 ### Scheduled tasks
-In command prompt type:
+In command prompt type: 
 ```
 schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\AitAgent" /disable
