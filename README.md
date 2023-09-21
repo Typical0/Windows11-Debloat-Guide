@@ -88,7 +88,7 @@ Get-AppxPackage -AllUsers *calc* | Remove-AppxPackage
 ```
 Download Classic Calulator from [Here](https://winaero.com/get-calculator-from-windows-8-and-windows-7-in-windows-10/)
 
-### Clipchamp, Quick Assist and Family
+### Clipchamp, Quick Assist and Family (22H2+)
 In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *Clipchamp* | Remove-AppxPackage
