@@ -1,36 +1,19 @@
-# Windows 11 Debloat Guide
+# Windows 11 Debloat Guide (Note: This version is undergoing a major rewrite.)
 
 ## IMPORTANT
 
-This guide is meant for advanced users who wants to get rid off Windows 11's bloatware and telemetry, if you have no experience of such thing then you can consider this [guide](https://youtu.be/QBp1d2uhG5M) for ease. <br>
+This guide is meant for advanced users who wants to get rid off Windows 11's bloatware and telemetry, by disabling or removing built-in components or applications.
 
 ![Windows 10 and later x64-2023-01-28-14-07-35](https://user-images.githubusercontent.com/81305501/215268038-8c6d21c8-14f0-4fc6-81b3-498bf5de8a30.png)
 
-**Note : You're doing this at your own risk, I am not responsible for any data loss or damage that may occur.** <br>
-Last tested on Windows 11 22621.525.
-
-### Pros
-
-➕ Get rid of bloatware <br>
-➕ Disable most of the telemetry <br>
-➕ Gain performance <br>
-➕ Optimize Windows 11 for gaming as well as productivity <br>
-➕ Strip Windows 11 to barebones (In Advanced removal below) <br>
-
-### Cons
-
-➖ Breaks Sysprep <br>
-➖ Breaks newer system updates if you use install_wim_tweak to remove components <br>
-➖ Don't use sfc/scannow command <br>
+**Note : You're doing this at your own risk, creator of this tutorial is not responsible for any data loss or damage that may occur.** <br>
+Last tested on Windows 11 22631.2361.
 
 ## Pre-Requisite
 
-• NTFS Access (to remove Windows Defender) <br>
+• NTFS Access (to remove Windows Defender application from system) <br>
 • Install_Wim_Tweak.exe (skip if you want to recieve updates) <br>
-• DISM++ (Optional but recommended) <br>
 • Winaero Tweaker
-
-## Debloating Windows 11 
 
 ### Before you debloat!
 At the end of the setup process, create a local account, don't use Cortana and turn off everything in the privacy settings. <br>
@@ -58,7 +41,7 @@ Copy and paste the "install_wim_tweak.exe" to C:\Windows\System32 .<br>
 
 The first thing to do after the install is installing the updates. You should get all installed, because some of them might revert your changes after the debloat. So after the OOBE, open up Start Menu, select Settings, go to Windows Update section, and click Check updates.
 
-Before debloating if you have recently updated your copy of Windows 11 or just freshly installed it, I would recommend you to cleanup the component store with /resetbase command or use DISM++ for ease, it clears the temp files with update leftovers in WinSxS. <br>
+If you have recently updated to Windows 11 or just freshly installed it, I would recommend you to cleanup the component store with /resetbase command or use DISM++ for ease, it clears the temp files with update leftovers in WinSxS. <br>
 
 ![Screenshot (04)](https://user-images.githubusercontent.com/85176292/132123367-6e2ebe05-9f93-4c18-86cf-ffb1f7cc34ea.png)
 
