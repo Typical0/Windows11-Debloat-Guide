@@ -1,18 +1,17 @@
 # Windows 11 Debloat Guide (Note: This version is undergoing a major rewrite.)
 
+![Windows 10 and later x64-2023-01-28-14-07-35](https://user-images.githubusercontent.com/81305501/215268038-8c6d21c8-14f0-4fc6-81b3-498bf5de8a30.png)
+
 ## IMPORTANT
 
 This guide is meant for advanced users who wants to get rid off Windows 11's bloatware and telemetry, by disabling or removing built-in components or applications.
 
-![Windows 10 and later x64-2023-01-28-14-07-35](https://user-images.githubusercontent.com/81305501/215268038-8c6d21c8-14f0-4fc6-81b3-498bf5de8a30.png)
-
 **Note : You're doing this at your own risk, creator of this tutorial is not responsible for any data loss or damage that may occur.** <br>
-Last tested on Windows 11 22631.2361.
+Last tested on Windows 11 23H2 (22631.2361).
 
 ## Pre-Requisite
 
-• NTFS Access (to remove Windows Defender application from system) <br>
-• Install_Wim_Tweak.exe (skip if you want to recieve updates) <br>
+• install_wim_tweak.exe (skip if you want to recieve updates) <br>
 • Winaero Tweaker
 
 ### Before you debloat!
@@ -20,8 +19,7 @@ At the end of the setup process, create a local account, don't use Cortana and t
 ![Windows 10 and later x64 (2)-2023-07-14-19-06-09](https://github.com/Typical0/Windows11-Debloat-Guide/assets/81305501/f66b2c16-6053-44ee-afbc-e6840b0d4f00)
 ![Windows 10 and later x64 (2)-2023-07-14-19-06-09](https://github.com/Typical0/Windows11-Debloat-Guide/assets/81305501/40b12b5c-a113-45a3-9561-3321bb70600a)
 
-To create a local user account in Windows 11 22H2 (doesn't include Enterprise/Education), you can go with 3 alternative options:
-
+To create a local user account in Windows 11 22H2/23H2 (doesn't include Enterprise/Education), you can go with 3 alternative options:
 
 1. When you should connect to a Internet, press Shift+F10 and type in Command Prompt:
 ```oobe\bypassnro```.
@@ -86,22 +84,16 @@ Get-AppxPackage -AllUsers *camera* | Remove-AppxPackage
 ````
 Ignore any error that pops up
 
-### Connect
-In the Command Prompt, type:
-```
-install_wim_tweak /o /c Microsoft-PPIProjection-Package /r
-```
-
-### Contact Support, Get Help
-In the Command Prompt, type:
-```
-install_wim_tweak /o /c Microsoft-Windows-ContactSupport /r
-```
-
 ### Cortana (UWP App)
 In the PowerShell, type:
 ```
 Get-AppxPackage -allusers Microsoft.549981C3F5F10 | Remove-AppxPackage
+```
+
+### Dev Home (23H2+)
+In the PowerShell, type:
+```
+Get-AppxPackage -AllUsers *Microsoft.Windows.DevHome* | Remove-AppxPackage
 ```
 
 ### Feedback Hub
@@ -161,12 +153,6 @@ Get-AppxPackage -AllUsers *store* | Remove-AppxPackage
 ```
 Ignore any error that pops up.<br>
 
-In Command Prompt, type: <br>
-```
-install_wim_tweak /o /c Microsoft-Windows-ContentDeliveryManager /r
-install_wim_tweak /o /c Microsoft-Windows-Store /r
-```
-
 ### Microsoft Store Services (not recommended if you are going to use any UWP app)
 
 In Command Prompt, type: <br>
@@ -193,7 +179,7 @@ Get-AppxPackage -AllUsers *Microsoft.Office.Sway* | Remove-AppxPackage
 Get-AppxPackage -AllUsers *Microsoft.Office.Desktop* | Remove-AppxPackage
 ```
 
-### Outlook (25306+)
+### Outlook (23H2+)
 In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *OutlookForWindows* | Remove-AppxPackage
@@ -231,7 +217,7 @@ In the PowerShell, type:
 Get-AppxPackage -AllUsers *phone* | Remove-AppxPackage
 ```
 
-### Weather, News, ...
+### Weather, News, ... (Bing apps)
 In the PowerShell, type:
 ```
 Get-AppxPackage -AllUsers *bing* | Remove-AppxPackage
@@ -296,7 +282,7 @@ install_wim_tweak.exe /o /l
 install_wim_tweak.exe /o /c "Microsoft-Windows-Internet-Browser-Package" /r
 install_wim_tweak.exe /h /o /l
 ```
-Restart is required after this (you can restart later when you are done debloating everything). In 22H2 and above, the broken icon doesn't appear anymore, so you can ignore this section.
+Restart is required after this (you can restart later when you are done debloating everything). In 22H2 and above, the broken icon doesn't appear anymore, so you can ignore the commands above
 
 ### OneDrive
 In the Command Promopt, type:
@@ -334,7 +320,6 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "SecurityHealth" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SecHealthUI.exe" /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f
-install_wim_tweak /o /c Windows-Defender /r
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d 0 /f
 reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /f
 schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /disable
@@ -359,24 +344,6 @@ To remove WinDefend, which is the main service, you need to:
 
 7. Reboot your PC.
 Don't forget to backup the services. 
-
-After that use NTFS Access and take ownership of C:\Program Files\WindowsApps\ and C:\ProgramData\Microsoft\.
-
-![Screenshot (09)](https://user-images.githubusercontent.com/85176292/132126349-d91c4b65-f3c4-412e-a0c9-bba4c039ac30.png)
-
-In WindowsApps, delete the SecHealthUI folder.
-
-![Screenshot (10)](https://user-images.githubusercontent.com/85176292/132126362-c47be7df-d62f-4212-bd07-97714fd47041.png)
-
-In ProgramData\Microsoft, delete every folder related to Windows Defender.
-
-![Screenshot (11)](https://user-images.githubusercontent.com/85176292/132126653-1cbec29b-4c31-49f0-b596-b230913f4f30.png)
-
-### Windows Defender (keeping definition updates and services)
-
-Just take the ownership of C:\Program Files\WindowsApps\ and C:\ProgramData\Microsoft <br>
-Then delete the SecHealthUI folder insider WindowsApps and every folder related to Windows Defender inside ProgramData. <br>
-Now disable Windows Defender through WinAeroTweaker.
 
 ## Remove services and tasks
 ### Removing Options from Settings Apps
