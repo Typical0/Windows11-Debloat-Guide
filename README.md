@@ -6,15 +6,16 @@
 
 This guide is meant for advanced users who wants to get rid off Windows 11's bloatware and telemetry, by disabling or removing built-in components or applications.
 
-**Note : You're doing this at your own risk, creator of this tutorial is not responsible for any data loss or damage that may occur.** <br>
-Last tested on Windows 11 23H2 (22631.2361).
+**Note : You're doing this at your own risk, creator of this tutorial is not responsible for any data loss or damage that may occur. ** <br>
+This guide was tested on Windows 11 23H2 (22631.2361).
 
-## Pre-Requisite
+## Pre-requisite
 
 • install_wim_tweak.exe (skip if you want to recieve updates) <br>
 • Winaero Tweaker
 
 ### Before you debloat!
+
 At the end of the setup process, create a local account, don't use Cortana and turn off everything in the privacy settings. <br>
 ![Windows 10 and later x64 (2)-2023-07-14-19-06-09](https://github.com/Typical0/Windows11-Debloat-Guide/assets/81305501/f66b2c16-6053-44ee-afbc-e6840b0d4f00)
 ![Windows 10 and later x64 (2)-2023-07-14-19-06-09](https://github.com/Typical0/Windows11-Debloat-Guide/assets/81305501/40b12b5c-a113-45a3-9561-3321bb70600a)
@@ -45,8 +46,7 @@ If you have recently updated to Windows 11 or just freshly installed it, I would
 
 ![Screenshot (05)](https://user-images.githubusercontent.com/85176292/132123387-5c0b6700-0497-4561-a01f-2ba419455c46.png)
 
-**Note : If DISM++ gives error while cleaning up the component store use this command (Command Prompt as Admin Obviously)**
-
+**Note : If DISM++ gives error while cleaning up the component store, use this command (Command Prompt as a admin obviously)**
 ```
 DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 ```
@@ -248,27 +248,6 @@ schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTask" /disable
 schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTaskLogon" /disable
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t REG_DWORD /d 0 /f
 ```
-
-### Optimizing
-
-Since you have removed all the UWP apps, you can delete the leftovers from C:\Program Files\WindowsApps. <br>
-Take the ownership as we did above. <br>
-Now delete folders according to what apps, you've removed. <br>
-
-For example, I've removed everything and kept Store, Xbox, Notepad (UWP) and Windows Terminal. <br>
-
-![Screenshot (12)](https://user-images.githubusercontent.com/85176292/132127306-370369f6-d9f0-4a39-87e4-9b1eaa35eef8.png)
-
-And here I've removed every app. <br>
-
-![Screenshot (13)](https://user-images.githubusercontent.com/85176292/132127308-3c44ff88-4dd9-4595-a1c9-f868c77ff33c.png)
-
-Now create a new user account or enable Windows Administrator account, log into it and voila! <br>
-You have successfully removed nearly all UWP apps from Windows 11!
-
-![Screenshot (14)](https://user-images.githubusercontent.com/85176292/132127314-a39be4cc-f084-4190-81e5-c44306db1edf.png)
-
-Unfortunately there is no way to remove "Get Started" and "Windows Backup" (23466.1001+) from the start menu without compromising the new Start Menu/taskbar so just pretend it's not there at all :)
 
 ## Remove other built-in applications
 
@@ -506,7 +485,7 @@ Use the batch script to disable them. <br>
 
 ## Stripping Windows 11 to barebone! (only for 21H2)
 
-To strip Windows 11 to barebones, you need to uninstall Windows Feature Experience Pack, which has most of the new features (XAML taskbar, start menu, Get Started app). After uninstalling Feature Experience Pack, you won't be able to go back to the Windows 11 look, unless you reinstall Feature Experience Pack. **DO NOT DO THIS AT HOME AND ON YOUR MAIN COMPUTER.**
+To strip Windows 11 to barebones, you need to uninstall Windows Feature Experience Pack, which has most of the new features (XAML taskbar, start menu, Get Started app). After uninstalling Feature Experience Pack, you won't be able to go back to the Windows 11 look, unless you reinstall Feature Experience Pack. **Do not do this at home and your main computer, unless you know what you're doing.**
 
 1. Install ExplorerPatcher or StartAllBack, and enable custom shell (Windows 10 taskbar and start menu in case of ExplorerPatcher, custom taskbar and start menu for SAB)
 2. Open up CMD with Administrator permissions, and type in: 
