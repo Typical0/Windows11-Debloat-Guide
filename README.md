@@ -7,7 +7,7 @@
 This guide is meant for advanced users who wants to get rid off Windows 11's bloatware and telemetry, by disabling or removing built-in components or applications.
 
 **Note : You're doing this at your own risk, creator of this tutorial is not responsible for any data loss or damage that may occur. ** <br>
-This guide was tested on Windows 11 23H2 (22631.2361).
+This guide was tested on Windows 11 23H2 (22631.2428).
 
 ## Pre-requisite
 
