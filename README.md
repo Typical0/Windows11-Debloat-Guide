@@ -45,11 +45,9 @@ To create a local user account in Windows 11 22H2 (doesn't include Enterprise/Ed
 After reboot, you should select I don't have internet and continue further.
 ![Windows 10 and later x64-2023-01-27-16-12-01](https://user-images.githubusercontent.com/81305501/215120064-2e8f4129-d66e-423f-9586-39aac8364e86.png)
 
-2. Configure as normally, until you get a login to Microsoft Account. Then type in a@a.com, and any random password.
-![Windows 10 and later x64-2023-01-27-16-16-33](https://user-images.githubusercontent.com/81305501/215121534-dec5fc8b-265c-4274-a992-7e2444d405c3.png)
-It should error that someone has entered an incorrect password too many times. Just click Next and make a local account.
+~~2. Configure as normally, until you get a login to Microsoft Account. Then type in a@a.com, and any random password. It should error that someone has entered an incorrect password too many times. Just click Next and make a local account.~~ This has been recently patched.
 
-3. Select Set up for work and school on the How would you like to set up this device screen. Click Next, select Sign-in options and choose Domain join instead. You should be on the local account screen.
+2. Select Set up for work and school on the How would you like to set up this device screen. Click Next, select Sign-in options and choose Domain join instead. You should be on the local account screen.
 
 **Make sure you are doing this on a temporary user account because you'll be deleting this later on.** <br>
 Copy and paste the "install_wim_tweak.exe" to C:\Windows\System32 .<br>
