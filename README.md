@@ -7,11 +7,10 @@
 This guide is meant for advanced users who wants to get rid off Windows 11's bloatware and telemetry, by disabling or removing built-in components or applications.
 
 **Note : You're doing this at your own risk, creator of this tutorial is not responsible for any data loss or damage that may occur. ** <br>
-This guide was tested on Windows 11 23H2 (22631.2428).
+This guide was tested on Windows 11 24H2 (26100).
 
 ## Pre-requisite
 
-• install_wim_tweak.exe (skip if you want to recieve updates) <br>
 • Winaero Tweaker
 
 ### Before you debloat!
@@ -27,16 +26,13 @@ To create a local user account in Windows 11 22H2/23H2 (doesn't include Enterpri
 After reboot, you should select I don't have internet and continue further.
 ![Windows 10 and later x64-2023-01-27-16-12-01](https://user-images.githubusercontent.com/81305501/215120064-2e8f4129-d66e-423f-9586-39aac8364e86.png)
 
-2. Configure as normally, until you get a login to Microsoft Account. Then type in a@a.com, and any random password.
+~~2. Configure as normally, until you get a login to Microsoft Account. Then type in a@a.com, and any random password.
 ![Windows 10 and later x64-2023-01-27-16-16-33](https://user-images.githubusercontent.com/81305501/215121534-dec5fc8b-265c-4274-a992-7e2444d405c3.png)
-It should error that someone has entered an incorrect password too many times. Just click Next and make a local account.
+It should error that someone has entered an incorrect password too many times. Just click Next and make a local account.~~ This bypass has been recently patched.
 
-3. Select Set up for work and school on the How would you like to set up this device screen. Click Next, select Sign-in options and choose Domain join instead. You should be on the local account screen.
+2. Select Set up for work and school on the How would you like to set up this device screen. Click Next, select Sign-in options and choose Domain join instead. You should be on the local account screen.
 
 **Make sure you are doing this on a temporary user account because you'll be deleting this later on.** <br>
-Copy and paste the "install_wim_tweak.exe" to C:\Windows\System32 .<br>
-
-![Screenshot (03)](https://user-images.githubusercontent.com/85176292/132123362-f68c5829-c739-4628-94be-7ca2dc27fb54.png)
 
 The first thing to do after the install is installing the updates. You should get all installed, because some of them might revert your changes after the debloat. So after the OOBE, open up Start Menu, select Settings, go to Windows Update section, and click Check updates.
 
@@ -234,6 +230,7 @@ When it's done removing, log out of your account, and log back in. You shouldn't
 In the PowerShell, type: <br>
 ```
 Get-AppxPackage -AllUsers *xbox* | Remove-AppxPackage
+Get-AppxPackage -AllUsers *gaming* | Remove-AppxPackage
 ```
 
 ### Removing Xbox and Game DVR Services (not recommended if you are going to use it in future)
